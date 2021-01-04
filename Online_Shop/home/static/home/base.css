@@ -1,0 +1,96 @@
+body
+{
+    background-image: url("background.svg");
+    background-attachment: fixed;
+	background-size: cover;
+}
+#image1
+{
+    transform: scale(0.6, 0.6);
+    margin-left: -70px;
+    margin-top: -120px;
+    /* background-position: -100px; */
+    background-repeat: no-repeat;
+    width: 564px;
+    height: 705px;
+    background-image: url("images/komp1.jpg");
+    border-radius: 25px;
+    float: left;
+}
+#image2
+{
+    transform: scale(0.705, 0.705);
+    margin-left: 910px;
+    margin-top: -65px;
+    background-repeat: no-repeat;
+    width: 480px;
+    height: 600px;
+    background-image: url("images/komp3.jpg");
+    border-radius: 25px;
+    float: left;
+}
+#image3
+{
+    position: absolute;
+    margin-left: 300px;
+    transform: scale(0.7, 0.7);
+    background-repeat: no-repeat;
+    width: 1279px;
+    height: 853px;
+    background-image: url("images/inside.jpg");
+    border-radius: 150px;
+    clear: both;
+}
+#image4
+{
+    transform: scale(0.33, 0.65);
+    position: absolute;
+    margin-left: -300px;
+    margin-top: 400px;
+    background-repeat: no-repeat;
+    width: 1024px;
+    height: 656px;
+    background-image: url("images/procesor.jpg");
+    border-radius: 25px;
+    float: left;
+}
+#image5
+{
+    position: absolute;
+    transform: scale(0.6, 0.562);
+    background-repeat: no-repeat;
+    margin-left: 1360px;
+    margin-top: 350px;
+    width: 564px;
+    height: 752px;
+    background-image: url("images/komp4.jpg");
+    border-radius: 25px;
+    float: left;
+}
+#form
+{
+    margin-top: 20%;
+    margin-left: 49%;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    transform: scale(2, 2);
+}
+#link
+{
+    color: white;
+    font-weight: normal;
+    font-size: normal;
+}
+#login
+{
+    margin-left: 140px;
+}
+#shopName
+{
+    margin-left: 845px;
+    margin-top: 100px;
+    transform: scale(3, 3);
+    color: white;
+    font-size: x-large;
+}

@@ -1,0 +1,3 @@
+INSERT INTO project.pracownik VALUES(DEFAULT,'Tomasz','Kowalski','tomasz.kowalski@gmail.com','tomasz.kowalski','pracownik1','zamowienia','11-10-2020','specjalista ds. zamowien');
+INSERT INTO project.pracownik VALUES(DEFAULT,'Marek','Iwan','marek.iwan@gmail.com','marek.iwan','pracownik2','zamowienia,zwroty','10-08-2020','specjalista ds. zamowien i zwrotow');
+INSERT INTO project.pracownik VALUES(DEFAULT,'Filip','Kowalski','filip.kowalski@gmail.com','filip.kowalski','pracownik3','usuwanie kont','02-03-2020','administrator kont');

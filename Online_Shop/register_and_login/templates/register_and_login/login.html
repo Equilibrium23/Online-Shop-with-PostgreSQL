@@ -1,0 +1,12 @@
+{% extends "home/base.html" %}
+{% block content %}
+<p id="shopName">Sklep ...</p>
+    <form id = "form" method="POST">
+        {% csrf_token %}
+        {% for question in form %}
+            <p>{{ question.label }}:{{ question }}</p>
+        {% endfor %}
+        <button type="submit" id="login">Zaloguj</button>
+        <p>Nie masz konta ? <a id="link" href="{% url 'register' %}">Zarejestruj sie</a></p>
+    </form>
+{% endblock content %}

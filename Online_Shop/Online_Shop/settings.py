@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'user_profile.apps.UserProfileConfig',
+    'home.apps.HomeConfig',
+    'register_and_login.apps.RegisterAndLoginConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -70,15 +75,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Online_Shop.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+# # Database
+DATABASE = {
+    'NAME': 'hibqfymb',
+    'USER': 'hibqfymb',
+    'PASSWORD': 'J9K-YolYEAC6yt7pX44sEBveOZVstb6t',
+    'HOST': 'hattie.db.elephantsql.com',
+    'PORT': '5432'
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+            # 'NAME': 'hibqfymb ',
+            # 'USER': 'hibqfymb ',
+            # 'PASSWORD': 'J9K-YolYEAC6yt7pX44sEBveOZVstb6t',
+            # 'HOST': 'hattie.db.elephantsql.com',
+            # 'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -117,4 +131,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
