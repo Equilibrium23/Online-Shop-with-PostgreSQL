@@ -1,0 +1,32 @@
+{% extends "user_profile/logged_user_base.html" %}
+{% block content %}
+    <div id = "filter_bar">
+        <form method="GET" action="{% url 'search_filter' %}"">
+            <h3>Cena:</h3>
+            <input type="text" name="cena_od" placeholder="od">
+            <input type="text" name="cena_do" placeholder="do">
+            <h3>Przekatna Ekranu:</h3>
+            <input type="text" name="przekatna_od" placeholder="od">
+            <input type="text" name="przekatna_do" placeholder="do">
+            <h3>Rozdzielczosc:</h3>
+            <input type="text" name="rozdzielczosc_od" placeholder="od">
+            <input type="text" name="rozdzielcosc_do" placeholder="do">
+            <h3>Czas reakcji:</h3>
+            <input type="text" name="odswiezanie_od" placeholder="od">
+            <input type="text" name="odswiezanie_do" placeholder="do">
+            <h3>Matryca ekranu:</h3>
+            <p><input type="checkbox" name="ips"> IPS</p>
+            <p><input type="checkbox" name="va" > VA</p>
+            <p><input type="checkbox" name="tn"> TN</p>
+            <h3>Maksymalna jasnosc:</h3>
+            <input type="text" name="jasnosc do" placeholder="max">
+            <br><br>
+            <p><button type="submit">Filtruj</button></p>
+        </form>
+    </div>
+    <div id = "display_items">
+        {% for screen in data%}
+            <!-- to do -->
+        {% endfor %}
+    </div>
+{% endblock content %}

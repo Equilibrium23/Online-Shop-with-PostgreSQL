@@ -1,0 +1,38 @@
+{% load static %}
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'user_profile/base.css' %}">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    {% if title %}
+            <title>Equilibirium OnlineShop - {{title}}</title>
+    {% else %}
+            <title>Equilibirium OnlineShop</title>
+    {% endif %}
+    {% if data %}
+        <link rel="stylesheet" type="text/css" href="{% static 'user_profile/search.css' %}">
+    {% endif %}
+</head>
+<body>
+    <div id = 'navbar'>
+        <div id = 'search'>
+            <form method="GET" action="{% url 'search' %}">
+                <input type="text" name="search" placeholder="Czego szukasz ?..">
+                <button type="submit">Szukaj</button>
+            </form>
+        </div>
+        <div id = 'profile'>
+            <img src="{% static 'user_profile/profile.png' %}" alt="">
+            <a href="xd.pl"> <b>Profil</b> </a>
+        </div>
+        <div id = 'basket'>
+            <img src="{% static 'user_profile/basket.png' %}" alt="">
+            <a href="xd.pl"> <b>Koszyk</b> </a>
+        </div>
+        <div id ='blank'></div>
+    </div>
+    <div id = 'page_content'>
+        {% block content %}{% endblock %}
+    </div>
+</body>
