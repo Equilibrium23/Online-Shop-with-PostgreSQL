@@ -1,8 +1,15 @@
 import psycopg2
 from Online_Shop import settings
+def create_data_from_fetch(mobile_records,cursor):
+    column_names = [column[0] for column in cursor.description]
+    data = [{} for _ in range(len(mobile_records))]
+    for i in range(len(mobile_records)):
+        for j in range(len(mobile_records[i])):
+            data[i][column_names[j]] = mobile_records[i][j]
+    return data
+
 
 def search(searching_item):
-    print(searching_item)
     con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
     cur = con.cursor()
     postgreSQL_select_Query = "SELECT * FROM project.monitor WHERE nazwa LIKE \'%{}%\'".format(searching_item)
@@ -13,9 +20,67 @@ def search(searching_item):
         con.close()
         return []
     else:
-        column_names = [column[0] for column in cur.description]
-        data = [{} for _ in range(len(column_names))]
-        for i in range(len(mobile_records)):
-            for j in range(len(mobile_records[i])):
-                data[i][column_names[j]] = mobile_records[i][j]
+        data = create_data_from_fetch(mobile_records,cur)
     return data
+
+def filter(data):
+    cleanedData  = {a:b for a,b in data.items()}
+    checkBoxModel = [] # ok
+    checkBoxMatryca = [] # ok
+    cena = [] 
+    przekatna = []
+    rozdzielczosc = []
+    odswiezanie = []
+    jasnosc = []
+    for desc,value in cleanedData.items():
+        if value == 'on':
+            if desc == 'ips' or desc == 'tn' or desc == 'va':
+                checkBoxMatryca.append(desc)
+            else:
+                checkBoxModel.append(desc)
+        if 'cena' in desc:
+            cena.append(value)
+        if 'przekatna' in desc:
+            przekatna.append(value)
+        if 'rozdzielczosc' in desc:
+            rozdzielczosc.append(value)
+        if 'odswiezanie' in desc:
+            odswiezanie.append(value)
+        if 'jasnosc' in desc:
+            jasnosc.append(value)
+    ############################## create model query ####################
+    modelQuery = ""
+    if len(checkBoxModel) > 0:
+        modelQuery+= checkBoxModel[0]
+        if len(checkBoxModel) > 1:
+            for model in checkBoxModel[1:]:
+                modelQuery+="|"+model
+    ######################################################################
+    ############################## create matryca query ####################
+    matrycaQuery = ""
+    if len(checkBoxMatryca) > 0:
+        matrycaQuery+= checkBoxMatryca[0]
+        if len(checkBoxMatryca) > 1:
+            for matryca in checkBoxMatryca[1:]:
+                matrycaQuery+="|"+matryca
+    ###################################################################### 
+    con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
+    cur = con.cursor()
+
+    postgreSQL_select_Query = '''SELECT * FROM project.monitor
+                                 WHERE nazwa ~* \'{}\'
+                                 AND matryca ~* \'{}\'
+                                 AND (cena BETWEEN {} AND {})
+                                 AND (przekatna_ekranu BETWEEN {} AND {})
+                                 AND (odswiezanie BETWEEN {} AND {})
+                                 AND max_jasnosc < {}
+                                 '''.format(modelQuery,matrycaQuery,cena[0],cena[1],przekatna[0],przekatna[1],odswiezanie[0],odswiezanie[1],jasnosc[0])
+    cur.execute(postgreSQL_select_Query)
+    mobile_records = cur.fetchall()
+    if mobile_records is None:
+        cur.close()
+        con.close()
+        return []
+    else:
+        return_data = create_data_from_fetch(mobile_records,cur)
+    return return_data

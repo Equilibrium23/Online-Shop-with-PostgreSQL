@@ -25,16 +25,21 @@
     border: 5px solid black;
 }
 .screen_image{
+    margin-left: 5%;
+    margin-top: 5%;
+    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 5px solid blue;
     height: 100%;
-    padding-top: 5%;
     float: left;
 }
 
 .description{
+    left: 25%;
+    margin-left: 5%;
+    width: 27%;
     float: left;
     border: 5px solid yellow;
     width:fit-content ;
@@ -43,6 +48,8 @@
     font-size: x-large;
 }
 .opinion{
+    width: 37%;
+    margin-left: 3%;
     float: left;
     border: 5px solid red;
 }

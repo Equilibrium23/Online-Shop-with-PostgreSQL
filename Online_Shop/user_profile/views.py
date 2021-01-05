@@ -12,4 +12,5 @@ def search_items(request):
     return render(request, 'user_profile/search.html',{'data':data})
 
 def filter_items(request):
-    return render(request, 'user_profile/search.html')
+    data = search_item.filter(request.GET)
+    return render(request, 'user_profile/search.html',{'data':data})
