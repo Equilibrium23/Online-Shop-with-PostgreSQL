@@ -1,4 +1,5 @@
 {% extends "user_profile/logged_user_base.html" %}
+{% load static %}
 {% block content %}
     <div id = "filter_bar">
         <form method="GET" action="{% url 'search_filter' %}"">
@@ -25,8 +26,27 @@
         </form>
     </div>
     <div id = "display_items">
-        {% for screen in data%}
-            <!-- to do -->
+        {% for screen in data%} 
+            <div class = "display_screen">
+                <div class = "screen_image">
+                    <img src="{% static 'databaseHandler/static/images/msi/100.resized.png' %}">
+                </div>
+                <div class = "description">
+                    <p> <b class ="screen_data">Model:</b>  {{ screen.nazwa }}</p>
+                    <p> <b class ="screen_data">Cena:</b>  {{ screen.cena }}</p>
+                    <p> <b class ="screen_data">Przekatna ekranu:</b>  {{ screen.przekatna_ekranu }}</p>
+                    <p> <b class ="screen_data">Rozdzielczosc:</b>  {{ screen.rozdzielczosc }}</p>
+                    <p> <b class ="screen_data">Czas Reakcji (ms):</b>  {{ screen.odswiezanie }}</p>
+                    <p> <b class ="screen_data">Matryca:</b>  {{ screen.matryca }}</p>
+                    <p> <b class ="screen_data">Max jasnosc (cd/m²):</b>  {{ screen.max_jasnosc }}</p>
+                </div>
+                <div class = "opinion">
+                    <p>Opinia</p>
+                </div>
+                <div class = "blank"></div>
+            </div>
+            {{screen}}
+            <br>
         {% endfor %}
     </div>
 {% endblock content %}

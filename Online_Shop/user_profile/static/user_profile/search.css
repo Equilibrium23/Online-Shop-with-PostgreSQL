@@ -11,6 +11,7 @@
 
 }
 #display_items{
+    border-radius: 50px;
     float: left;
     width: 65%;
     left: 25%;
@@ -18,4 +19,33 @@
     border: 2px solid black;
     height: 100%;
     background-color: aliceblue;
+}
+
+.display_screen{
+    border: 5px solid black;
+}
+.screen_image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid blue;
+    height: 100%;
+    padding-top: 5%;
+    float: left;
+}
+
+.description{
+    float: left;
+    border: 5px solid yellow;
+    width:fit-content ;
+}
+.screen_data{
+    font-size: x-large;
+}
+.opinion{
+    float: left;
+    border: 5px solid red;
+}
+.blank{
+    clear: both;
 }

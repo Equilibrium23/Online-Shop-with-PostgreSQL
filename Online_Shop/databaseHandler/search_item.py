@@ -11,7 +11,11 @@ def search(searching_item):
     if mobile_records is None:
         cur.close()
         con.close()
-        return [False]
+        return []
     else:
-        data = [x for x in mobile_records]
+        column_names = [column[0] for column in cur.description]
+        data = [{} for _ in range(len(column_names))]
+        for i in range(len(mobile_records)):
+            for j in range(len(mobile_records[i])):
+                data[i][column_names[j]] = mobile_records[i][j]
     return data
