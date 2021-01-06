@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from databaseHandler import search_item
+from . import forms
 
 def logged(request):
     return render(request, 'user_profile/logged.html')
@@ -19,3 +20,22 @@ def search_items(request):
 def filter_items(request):
     data = search_item.filter(request.GET)
     return render_search_site(request,data)
+
+def profile(request):
+    return render(request, 'user_profile/profile.html')
+
+def user_opinions(request):
+    return render(request, 'user_profile/user_opinions.html',{'user_opinions':True})
+
+def user_orders(request):
+    return render(request, 'user_profile/user_orders.html',{'user_orders':True})
+
+def account_details(request):
+    if request.method == 'POST':
+        form = forms.AccountDetailsForm(request.POST)
+        if form.is_valid():
+            ### to do -> insert data
+            return redirect('profile')
+    else:
+        form = forms.AccountDetailsForm()
+    return render(request, 'user_profile/account_details.html', {'form':form,'account_details':True})

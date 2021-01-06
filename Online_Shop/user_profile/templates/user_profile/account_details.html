@@ -1,0 +1,16 @@
+{% extends "user_profile/profile.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% csrf_token %}
+<div id = "account_details_contener">
+    <div id = 'account_details_form'>
+        <h1>Dodaj dane adresowe:</h1>
+        <form id = "form" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit">Dodaj dane adresowe</button>
+        </form>
+    </div>
+    
+</div>
+{% endblock content %}

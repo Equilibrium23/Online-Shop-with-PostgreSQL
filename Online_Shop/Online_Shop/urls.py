@@ -27,4 +27,10 @@ urlpatterns = [
     path('logged/', user_profile_views.logged,name = "logged"),
     path('logged/search', user_profile_views.search_items,name = "search"),
     path('logged/search/filter', user_profile_views.filter_items,name = "search_filter"),
+    path('logged/profile/', user_profile_views.profile,name = "profile"),
+
+    path('logged/profile/opinions/', user_profile_views.user_opinions,name = "opinions"),
+    path('logged/profile/orders/', user_profile_views.user_orders,name = "orders"),
+    path('logged/profile/account_details/', user_profile_views.account_details,name = "account_details"),
+
 ]

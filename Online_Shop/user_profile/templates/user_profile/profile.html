@@ -3,15 +3,23 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="{% static 'user_profile/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'user_profile/profile.css' %}">
+    {% if user_opinions %}
+        <link rel="stylesheet" type="text/css" href="{% static 'user_profile/user_opinions.css' %}">
+    {% endif %}
+    {% if user_orders %}
+        <link rel="stylesheet" type="text/css" href="{% static 'user_profile/user_orders.css' %}">
+    {% endif %}
+    {% if account_details %}
+        <link rel="stylesheet" type="text/css" href="{% static 'user_profile/account_details.css' %}">
+    {% endif %}
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     {% if title %}
             <title>Equilibirium OnlineShop - {{title}}</title>
     {% else %}
             <title>Equilibirium OnlineShop</title>
-    {% endif %}
-    {% if data %}
-        <link rel="stylesheet" type="text/css" href="{% static 'user_profile/search.css' %}">
     {% endif %}
 </head>
 <body>
@@ -33,6 +41,15 @@
         <div id ='blank'></div>
     </div>
     <div id = 'page_content'>
-        {% block content %}{% endblock %}
+        <div id = 'profile_contener'>
+            <div id = 'profile_menu'>
+                <a href="{% url 'orders' %}"> <h1>Twoje zamowienia</h1> </a> 
+                <a href="{% url 'account_details' %}"> <h1>Dane</h1> </a> 
+                <a href="{% url 'opinions' %}"> <h1>Opinie</h1> </a> 
+            </div>
+            <div id = 'profile_content'>
+                {% block content %}{% endblock %}
+            </div>
+        </div>
     </div>
 </body>
