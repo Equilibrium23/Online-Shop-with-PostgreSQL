@@ -12,6 +12,7 @@
 }
 #display_items{
     border-radius: 50px;
+    background-image: url('background.svg');
     float: left;
     width: 65%;
     left: 25%;
@@ -22,7 +23,9 @@
 }
 
 .display_screen{
+    background-color: aliceblue;
     border: 5px solid black;
+    border-radius: 30px;
 }
 .screen_image{
     margin-left: 5%;
@@ -35,6 +38,16 @@
     height: 100%;
     float: left;
 }
+.buy{
+    float: left;
+    margin-left: 3%;
+    width: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+    height: 100%;
+} 
 
 .description{
     left: 25%;
@@ -48,11 +61,13 @@
     font-size: x-large;
 }
 .opinion{
-    width: 37%;
-    margin-left: 3%;
+    width: 36%;
     float: left;
     border: 5px solid red;
 }
 .blank{
     clear: both;
+}
+.separator{
+    height: 10px;
 }

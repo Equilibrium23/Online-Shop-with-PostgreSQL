@@ -18,8 +18,9 @@
             <input type="text" value="0" name="przekatna_od" placeholder="od">
             <input type="text" value="9999" name="przekatna_do" placeholder="do">
             <h3>Rozdzielczosc:</h3>
-            <input type="text" value="0" name="rozdzielczosc_od" placeholder="od">
-            <input type="text" value="9999" name="rozdzielczosc_do" placeholder="do">
+            {% for resolution in resolutions %} 
+                <p><input type="checkbox" name="{{ resolution }}"> {{ resolution }} </p>
+            {% endfor %}
             <h3>Czas reakcji:</h3>
             <input type="text" value="0" name="odswiezanie_od" placeholder="od">
             <input type="text" value="9999" name="odswiezanie_do" placeholder="do">
@@ -36,8 +37,11 @@
     <div id = "display_items">
         {% for screen in data%} 
             <div class = "display_screen">
+                <div class = 'buy'>
+                    <button onclick="">Dodaj do koszyka</button>
+                </div>
                 <div class = "screen_image">
-                    <img src="{% static 'databaseHandler/static/images/msi/100.resized.png' %}">
+                    <img src="{% static 'databaseHandler/static/images/msi/100.png' %}">
                 </div>
                 <div class = "description">
                     <p> <b class ="screen_data">Model:</b>  {{ screen.nazwa }}</p>
@@ -53,8 +57,7 @@
                 </div>
                 <div class = "blank"></div>
             </div>
-            {{screen}}
-            <br>
+            <div class = 'separator'></div>
         {% endfor %}
     </div>
 {% endblock content %}

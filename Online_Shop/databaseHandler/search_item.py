@@ -1,5 +1,26 @@
 import psycopg2
 from Online_Shop import settings
+
+
+def get_all_resolution():
+    con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
+    cursor = con.cursor()
+    postgreSQL_select_Query = "SELECT rozdzielczosc FROM project.monitor"
+    cursor.execute(postgreSQL_select_Query)
+    mobile_records = cursor.fetchall()
+    if mobile_records is None:
+        cursor.close()
+        con.close()
+        return []
+    else:
+        set_of_resolution = set()
+        for row in mobile_records:
+            set_of_resolution.add(row[0])
+        return set_of_resolution
+
+
+
+
 def create_data_from_fetch(mobile_records,cursor):
     column_names = [column[0] for column in cursor.description]
     data = [{} for _ in range(len(mobile_records))]
@@ -36,6 +57,8 @@ def filter(data):
         if value == 'on':
             if desc == 'ips' or desc == 'tn' or desc == 'va':
                 checkBoxMatryca.append(desc)
+            elif 'x' in desc:
+                rozdzielczosc.append(desc)
             else:
                 checkBoxModel.append(desc)
         if 'cena' in desc:
@@ -48,6 +71,15 @@ def filter(data):
             odswiezanie.append(value)
         if 'jasnosc' in desc:
             jasnosc.append(value)
+    ############################## create rozdzielczosc query ####################
+    rozdzielczoscQuery = ""
+    if len(rozdzielczosc) > 0:
+        rozdzielczoscQuery+= rozdzielczosc[0]
+        if len(rozdzielczosc) > 1:
+            for x in rozdzielczosc[1:]:
+                rozdzielczoscQuery+="|"+x
+    print(rozdzielczoscQuery)
+    ######################################################################
     ############################## create model query ####################
     modelQuery = ""
     if len(checkBoxModel) > 0:
@@ -66,15 +98,15 @@ def filter(data):
     ###################################################################### 
     con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
     cur = con.cursor()
-
     postgreSQL_select_Query = '''SELECT * FROM project.monitor
                                  WHERE nazwa ~* \'{}\'
                                  AND matryca ~* \'{}\'
+                                 AND rozdzielczosc ~* \'{}\'
                                  AND (cena BETWEEN {} AND {})
                                  AND (przekatna_ekranu BETWEEN {} AND {})
                                  AND (odswiezanie BETWEEN {} AND {})
                                  AND max_jasnosc < {}
-                                 '''.format(modelQuery,matrycaQuery,cena[0],cena[1],przekatna[0],przekatna[1],odswiezanie[0],odswiezanie[1],jasnosc[0])
+                                 '''.format(modelQuery,matrycaQuery,rozdzielczoscQuery,cena[0],cena[1],przekatna[0],przekatna[1],odswiezanie[0],odswiezanie[1],jasnosc[0])
     cur.execute(postgreSQL_select_Query)
     mobile_records = cur.fetchall()
     if mobile_records is None:
