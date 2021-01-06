@@ -8,5 +8,5 @@ class registerForm(forms.Form):
     name = forms.CharField(label = 'name', max_length=100)
     surname = forms.CharField(label = 'surname', max_length=100)
     login = forms.CharField(label = 'login', max_length=100)
-    email = forms.CharField(label = 'email', max_length=100)
+    email = forms.EmailField(label = 'email')
     password = forms.CharField(label = 'password', max_length=100, widget=forms.PasswordInput())
