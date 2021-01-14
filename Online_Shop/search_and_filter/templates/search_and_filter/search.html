@@ -1,6 +1,7 @@
 {% extends "user_profile/logged_user_base.html" %}
 {% load static %}
 {% load template_filters %}
+{% load crispy_forms_tags %}
 {% block content %}
     <div id = "filter_bar">
         <form method="GET" action="{% url 'search_filter' %}">
@@ -63,7 +64,10 @@
         {% for screen in data%} 
             <div class = "display_screen">
                 <div class = 'buy'>
-                    <button onclick="">Dodaj do koszyka</button>
+                    <form action="{% url 'basket' screen.id_monitor %}" method="POST">
+                        {% csrf_token %}
+                         <button type="submit" name='mybtn2'>Dodaj do koszyka</button>
+                    </form>
                 </div>
                 <div class = "screen_image">
                     <img src="{% static 'databaseHandler/static/images/msi/100.png' %}">

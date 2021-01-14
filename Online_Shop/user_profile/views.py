@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from . import forms
+from databaseHandler import basket
 
 def logged(request):
     return render(request, 'user_profile/logged_user_base.html')
@@ -22,3 +23,8 @@ def account_details(request):
     else:
         form = forms.AccountDetailsForm()
     return render(request, 'user_profile/account_details.html', {'form':form,'account_details':True})
+
+
+def add_item_to_basket(request,monitor_id):
+    basket.add_monitor_to_user_basket(request,monitor_id)
+    return redirect(request.session['redirect'])

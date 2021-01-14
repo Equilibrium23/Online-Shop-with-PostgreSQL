@@ -33,5 +33,7 @@ urlpatterns = [
     path('logged/profile/opinions/', user_profile_views.user_opinions,name = "opinions"),
     path('logged/profile/orders/', user_profile_views.user_orders,name = "orders"),
     path('logged/profile/account_details/', user_profile_views.account_details,name = "account_details"),
+    path('logged/basket/<int:monitor_id>/', user_profile_views.add_item_to_basket,name = "basket"),
+
 
 ]

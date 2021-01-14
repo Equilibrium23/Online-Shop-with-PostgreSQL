@@ -1,7 +1,12 @@
 from django.shortcuts import render,redirect
 from . import forms
 from databaseHandler import login as database_login 
+from databaseHandler import login as database_login 
 from databaseHandler import register as database_register 
+
+def set_user_session(request, login_data):
+    user_id = database_login.get_user_id(login_data)
+    request.session['user_id'] = user_id
 
 def login(request):
     if request.method == 'POST':
@@ -9,6 +14,7 @@ def login(request):
         if form.is_valid():
             status = database_login.login(form.cleaned_data)
             if status[0] == True:
+                set_user_session(request,form.cleaned_data)
                 return redirect('logged')
             else:
                 return render(request,'register_and_login/done.html',{'response' : status})

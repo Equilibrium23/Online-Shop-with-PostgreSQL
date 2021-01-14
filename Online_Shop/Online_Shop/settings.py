@@ -87,16 +87,12 @@ DATABASE = {
     'HOST': 'hattie.db.elephantsql.com',
     'PORT': '5432'
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-            # 'NAME': 'hibqfymb ',
-            # 'USER': 'hibqfymb ',
-            # 'PASSWORD': 'J9K-YolYEAC6yt7pX44sEBveOZVstb6t',
-            # 'HOST': 'hattie.db.elephantsql.com',
-            # 'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation

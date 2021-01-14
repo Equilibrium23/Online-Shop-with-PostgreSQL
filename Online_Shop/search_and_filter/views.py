@@ -12,8 +12,10 @@ def search_items(request):
     if '+' in searching_item:
         searching_item = searching_item.replace('+',' ')
     data = search_item.search(searching_item)
+    request.session['redirect'] = request.build_absolute_uri()
     return render_search_site(request,data)
 
 def filter_items(request):
     data = search_item.filter(request.GET)
+    request.session['redirect'] = request.build_absolute_uri()
     return render_search_site(request,data)

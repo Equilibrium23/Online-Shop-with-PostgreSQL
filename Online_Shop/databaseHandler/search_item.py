@@ -33,7 +33,7 @@ def create_data_from_fetch(mobile_records,cursor):
 def search(searching_item):
     con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
     cur = con.cursor()
-    postgreSQL_select_Query = "SELECT * FROM project.monitor WHERE nazwa LIKE \'%{}%\'".format(searching_item)
+    postgreSQL_select_Query = "SELECT * FROM project.monitor WHERE nazwa ILIKE \'%{}%\'".format(searching_item)
     cur.execute(postgreSQL_select_Query)
     mobile_records = cur.fetchall()
     if mobile_records is None:
@@ -53,6 +53,7 @@ def filter(data):
     rozdzielczosc = []
     odswiezanie = []
     jasnosc = []
+    sort = []
     for desc,value in cleanedData.items():
         if value == 'on':
             if desc == 'ips' or desc == 'tn' or desc == 'va':
@@ -71,6 +72,8 @@ def filter(data):
             odswiezanie.append(value)
         if 'jasnosc' in desc:
             jasnosc.append(value)
+        if 'sort' == desc:
+            sort.append(value)
     ############################## create rozdzielczosc query ####################
     rozdzielczoscQuery = ""
     if len(rozdzielczosc) > 0:
@@ -98,17 +101,32 @@ def filter(data):
     ###################################################################### 
     con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
     cur = con.cursor()
-    postgreSQL_select_Query = '''SELECT * FROM project.monitor
-                                 WHERE nazwa ~* \'{}\'
-                                 AND matryca ~* \'{}\'
-                                 AND rozdzielczosc ~* \'{}\'
-                                 AND (cena BETWEEN {} AND {})
-                                 AND (przekatna_ekranu BETWEEN {} AND {})
-                                 AND (odswiezanie BETWEEN {} AND {})
-                                 AND max_jasnosc < {}
-                                 '''.format(modelQuery,matrycaQuery,rozdzielczoscQuery,cena[0],cena[1],przekatna[0],przekatna[1],odswiezanie[0],odswiezanie[1],jasnosc[0])
-    cur.execute(postgreSQL_select_Query)
-    mobile_records = cur.fetchall()
+    if len(sort) > 0 :
+        sort.append(cleanedData["sort_type"])
+        postgreSQL_select_Query = '''SELECT * FROM project.monitor
+                                    WHERE nazwa ~* \'{}\'
+                                    AND matryca ~* \'{}\'
+                                    AND rozdzielczosc ~* \'{}\'
+                                    AND (cena BETWEEN {} AND {})
+                                    AND (przekatna_ekranu BETWEEN {} AND {})
+                                    AND (odswiezanie BETWEEN {} AND {})
+                                    AND max_jasnosc < {}
+                                    ORDER BY {} {}
+                                    '''.format(modelQuery,matrycaQuery,rozdzielczoscQuery,cena[0],cena[1],przekatna[0],przekatna[1],odswiezanie[0],odswiezanie[1],jasnosc[0],sort[0],sort[1])
+        cur.execute(postgreSQL_select_Query)
+        mobile_records = cur.fetchall()
+    else:
+        postgreSQL_select_Query = '''SELECT * FROM project.monitor
+                                    WHERE nazwa ~* \'{}\'
+                                    AND matryca ~* \'{}\'
+                                    AND rozdzielczosc ~* \'{}\'
+                                    AND (cena BETWEEN {} AND {})
+                                    AND (przekatna_ekranu BETWEEN {} AND {})
+                                    AND (odswiezanie BETWEEN {} AND {})
+                                    AND max_jasnosc < {}
+                                    '''.format(modelQuery,matrycaQuery,rozdzielczoscQuery,cena[0],cena[1],przekatna[0],przekatna[1],odswiezanie[0],odswiezanie[1],jasnosc[0])
+        cur.execute(postgreSQL_select_Query)
+        mobile_records = cur.fetchall()
     if mobile_records is None:
         cur.close()
         con.close()
