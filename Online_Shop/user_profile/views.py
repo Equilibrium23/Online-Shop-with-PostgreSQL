@@ -3,7 +3,7 @@ from databaseHandler import search_item
 from . import forms
 
 def logged(request):
-    return render(request, 'user_profile/logged.html')
+    return render(request, 'user_profile/logged_user_base.html')
 
 
 def render_search_site(request,data):

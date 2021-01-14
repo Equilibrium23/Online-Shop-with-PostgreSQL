@@ -9,7 +9,7 @@ def login(request):
         if form.is_valid():
             status = database_login.login(form.cleaned_data)
             if status[0] == True:
-                return redirect('profile')
+                return redirect('logged')
             else:
                 return render(request,'register_and_login/done.html',{'response' : status})
     else:
@@ -21,7 +21,7 @@ def register(request):
         form = forms.registerForm(request.POST)
         if form.is_valid():
             database_register.register(form.cleaned_data)
-            return render(request,'register_and_login/done.html')
+            return redirect('login')
     else:
         form = forms.registerForm()
     return render(request, 'register_and_login/register.html', {'form':form,'title':'register'})
