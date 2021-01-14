@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'search_and_filter.apps.SearchAndFilterConfig',
     'user_profile.apps.UserProfileConfig',
     'home.apps.HomeConfig',
     'register_and_login.apps.RegisterAndLoginConfig',
@@ -68,6 +69,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                    'template_filters': 'template_filters.template_filters',
+                }
         },
     },
 ]

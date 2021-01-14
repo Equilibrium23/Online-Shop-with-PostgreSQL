@@ -1,5 +1,6 @@
 {% extends "user_profile/logged_user_base.html" %}
 {% load static %}
+{% load template_filters %}
 {% block content %}
     <div id = "filter_bar">
         <form method="GET" action="{% url 'search_filter' %}">
@@ -12,25 +13,49 @@
             <p><input type="checkbox" name="aoc" > AOC</p>
             <p><input type="checkbox" name="lg"> LG</p>
             <h3>Cena:</h3>
-            <input type="text" value="0" name="cena_od" placeholder="od">
-            <input type="text" value="9999" name="cena_do" placeholder="do">
+            <input type="text" value="{{ filters_limits|lookupMIN:"cena" }}" name="cena_od" placeholder="od">
+            <input type="text" value="{{ filters_limits|lookupMAX:"cena" }}" name="cena_do" placeholder="do">
             <h3>Przekatna Ekranu:</h3>
-            <input type="text" value="0" name="przekatna_od" placeholder="od">
-            <input type="text" value="9999" name="przekatna_do" placeholder="do">
+            <input type="text" value="{{ filters_limits|lookupMIN:"przekatna_ekranu" }}" name="przekatna_od" placeholder="od">
+            <input type="text" value="{{ filters_limits|lookupMAX:"przekatna_ekranu" }}" name="przekatna_do" placeholder="do">
             <h3>Rozdzielczosc:</h3>
             {% for resolution in resolutions %} 
                 <p><input type="checkbox" name="{{ resolution }}"> {{ resolution }} </p>
             {% endfor %}
             <h3>Czas reakcji:</h3>
-            <input type="text" value="0" name="odswiezanie_od" placeholder="od">
-            <input type="text" value="9999" name="odswiezanie_do" placeholder="do">
+            <input type="text" value="{{ filters_limits|lookupMIN:"odswiezanie" }}" name="odswiezanie_od" placeholder="od">
+            <input type="text" value="{{ filters_limits|lookupMAX:"odswiezanie" }}" name="odswiezanie_do" placeholder="do">
             <h3>Matryca ekranu:</h3>
             <p><input type="checkbox" name="ips"> IPS</p>
             <p><input type="checkbox" name="va" > VA</p>
             <p><input type="checkbox" name="tn"> TN</p>
             <h3>Maksymalna jasnosc:</h3>
-            <input type="text" value="9999" name="jasnosc_do" placeholder="max">
-            <br><br>
+            <input type="text" value="{{ filters_limits|lookupMAX:"max_jasnosc" }}" name="jasnosc_do" placeholder="max">
+            <br>
+            <h3>Sortuj po:</h3>
+
+            <input type="radio" name="sort" id = "sort_cena" value="cena">
+            <label for="sort_cena">Cena</label><br>
+
+            <input type="radio" name="sort" id = "sort_przekatna" value="przekatna">
+            <label for="sort_przekatna">Przekatna ekranu</label><br> 
+
+            <input type="radio" name="sort" id = "sort_rozdzielczosc" value="rozdzielczosc">
+            <label for="sort_rozdzielczosc">Rozdzielczosc ekranu</label><br>
+
+            <input type="radio" name="sort" id = "sort_czas_reakcji" value="czas_reakcji">
+            <label for="sort_czas_reakcji">Czas reakcji</label><br>
+
+            <input type="radio" name="sort" id = "sort_jasnosc" value="jasnosc">
+            <label for="sort_jasnosc">Jasnosc</label><br>
+
+            <h3><label for="sort_type">Typ sortowania:</label></h3>
+            <select id="sort_type" name="sort_type">
+              <option value="DESC">Malejaco</option>
+              <option value="ASC">Rosnaco</option>
+            </select>
+            <br>
+            <br>
             <p><button type="submit">Filtruj</button></p>
         </form>
     </div>
