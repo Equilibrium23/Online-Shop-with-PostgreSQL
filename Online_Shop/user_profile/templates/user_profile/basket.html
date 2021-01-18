@@ -1,0 +1,58 @@
+{% extends "user_profile/logged_user_base.html" %}
+{% load template_filters %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% csrf_token %}
+<div id = "basket_container">
+    <h2>Twoj koszyk:</h2>
+    <table>
+        <tr>
+            <td>Nazwa</td>
+            <td>Ilosc</td>
+            <td>Cena jednostkowa</td>
+            <td>Cena sumaryczna</td>
+        </tr>
+        {% for column in koszyk %}
+            <tr>
+                {% for info in column %}
+                    <td class = "basket_cell">
+                        {{ info }}
+                    </td>
+                {% endfor %}
+                <td class = "basket_cell">
+                    <a href="/logged/basket/?name={{column|access:0}}">Usun z koszyka</a>
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td class = "basket_cell">Suma w koszyku</td>
+            <td>{{ sum }}</td>
+        </tr>
+        <tr>
+            <td>Wybierz sposob dostawy:</td>
+            <form action="{% url 'order' %}" method="POST" id = "basket_form">
+                {% csrf_token %}
+                <input id="suma" name="suma" type="hidden" value={{sum}}>
+            <td>
+                <select name = "delivery" form = "basket_form">
+                    <option value="1">{{ dostawa|access2:0 }}</option>
+                    <option value="2">{{ dostawa|access2:1 }}</option>
+                    <option value="3">{{ dostawa|access2:2 }}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class = "basket_cell">
+                <button type="submit" name='mybtn2'>Zloz zamowienie</button>
+            </td>
+        </tr>
+            </form> 
+    </table>
+
+
+
+
+</div>
+
+
+{% endblock content %}

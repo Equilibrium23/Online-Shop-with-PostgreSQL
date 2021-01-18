@@ -13,6 +13,9 @@
     {% if data %}
         <link rel="stylesheet" type="text/css" href="{% static 'search_and_filter/search.css' %}">
     {% endif %}
+    {% if koszyk %}
+        <link rel="stylesheet" type="text/css" href="{% static 'user_profile/basket.css' %}">
+    {% endif %}
 </head>
 <body>
     <div id = 'navbar'>
@@ -28,7 +31,7 @@
         </div>
         <div id = 'basket'>
             <img src="{% static 'user_profile/basket.png' %}" alt="">
-            <a href="xd.pl"> <b>Koszyk</b> </a>
+            <a href="{% url 'basket' %}"> <b>Koszyk</b> </a>
         </div>
         <div id ='blank'></div>
     </div>

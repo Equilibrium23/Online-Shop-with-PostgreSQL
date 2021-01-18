@@ -1,0 +1,7 @@
+{% extends "user_profile/logged_user_base.html" %}
+{% load template_filters %}
+{% block content %}
+<div id = "basket_container">
+    <h2>{{koszyk|access:0}}</h2>
+</div>
+{% endblock content %}
