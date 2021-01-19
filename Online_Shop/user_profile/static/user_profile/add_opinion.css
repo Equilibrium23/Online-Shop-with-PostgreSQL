@@ -1,11 +1,11 @@
-#user_orders_container{
+#add_opinion_container{
     margin-top: -10%;
     background-color: aliceblue;
     border-radius: 50px;
 }
-#user_orders{
+#add_opinion{
     margin-left: 10%;
 }
-.order_cell{
-    width: 200px;
+.form{
+    font-size: xx-large;
 }

@@ -1,0 +1,23 @@
+{% extends "user_profile/profile.html" %}
+{% block content %}
+{% load template_filters %}
+
+<div id = "user_orders_container">
+    <div id = 'user_orders'>
+        {% for nr,items in user_orders.items %}
+            <h1>Zamowienie :</h1>
+            {% for item in items %}
+                <table>
+                    <tr>
+                        <td class = "order_cell">{{item|access:0}}</td>
+                        <td class = "order_cell">Ilosc:{{item|access:2}}</td>
+                        <td class = "order_cell">Data kupna:{{item|access:3}}</td>
+                        <td class = "order_cell"><a href="opinion/?produkt={{item|access:1}}">Dodaj ocene</a></td>
+                        <td class = "order_cell"><a href="return/?produkt={{item|access:1}}">Zwroc produkt</a></td>
+                    </tr>
+                </table>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

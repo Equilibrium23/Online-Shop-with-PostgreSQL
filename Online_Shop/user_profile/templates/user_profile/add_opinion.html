@@ -1,0 +1,15 @@
+{% extends "user_profile/profile.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% csrf_token %}
+<div id = "add_opinion_container">
+    <div id = 'add_opinion'>
+        <form id = "form" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="hidden" value="{{add_opinion}}">
+            <button type="submit">Dodaj opinie</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

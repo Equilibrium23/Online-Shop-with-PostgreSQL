@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from . import forms
 from databaseHandler import basket as user_basket
+from databaseHandler import profile as user_profile
 
 def logged(request):
     return render(request, 'user_profile/logged_user_base.html')
@@ -23,7 +24,8 @@ def user_opinions(request):
     return render(request, 'user_profile/user_opinions.html',{'user_opinions':True})
 
 def user_orders(request):
-    return render(request, 'user_profile/user_orders.html',{'user_orders':True})
+    user_orders = user_basket.get_user_orders(request.session['user_id'])
+    return render(request, 'user_profile/user_orders.html',{'user_orders':user_orders})
 
 def account_details(request):
     if request.method == 'POST':
@@ -44,3 +46,13 @@ def make_order(request):
     user_basket.add_order(request.session['user_id'],request.POST.get("delivery"),request.POST.get("suma"))
     user_basket.delete_all_from_basket(request.session['user_id'])
     return redirect('profile')
+
+def add_opinion(request):
+    if request.method == 'POST':
+        form = forms.OpinionForm(request.POST)
+        if form.is_valid():
+            user_profile.add_user_opinion(form.cleaned_data,request.session['user_id'])
+            return redirect('opinions')
+    else:
+        form = forms.OpinionForm()
+    return render(request, 'user_profile/add_opinion.html', {'form':form,'add_opinion':request.GET.get('produkt')})

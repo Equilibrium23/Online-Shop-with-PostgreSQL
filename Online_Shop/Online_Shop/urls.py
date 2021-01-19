@@ -32,10 +32,9 @@ urlpatterns = [
     path('logged/search/', searching_views .search_items,name = "search"),
     path('logged/search/filter/', searching_views.filter_items,name = "search_filter"),
     path('logged/profile/', user_profile_views.profile,name = "profile"),
+    path('logged/profile/orders', user_profile_views.user_orders,name = "orders"),
     path('logged/profile/opinions/', user_profile_views.user_opinions,name = "opinions"),
-    path('logged/profile/orders/', user_profile_views.user_orders,name = "orders"),
+    path('logged/profile/opinion/', user_profile_views.add_opinion,name = "opinion"),
     path('logged/profile/account_details/', user_profile_views.account_details,name = "account_details"),
     path('logged/basket/<int:monitor_id>/', user_profile_views.add_item_to_basket,name = "basket"),
-
-
 ]

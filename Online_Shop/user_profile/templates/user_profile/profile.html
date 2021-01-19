@@ -10,6 +10,11 @@
     {% if user_orders %}
         <link rel="stylesheet" type="text/css" href="{% static 'user_profile/user_orders.css' %}">
     {% endif %}
+
+    {% if add_opinion %}
+        <link rel="stylesheet" type="text/css" href="{% static 'user_profile/add_opinion.css' %}">
+    {% endif %}
+
     {% if account_details %}
         <link rel="stylesheet" type="text/css" href="{% static 'user_profile/account_details.css' %}">
     {% endif %}
