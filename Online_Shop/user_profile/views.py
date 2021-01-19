@@ -55,4 +55,5 @@ def add_opinion(request):
             return redirect('opinions')
     else:
         form = forms.OpinionForm()
-    return render(request, 'user_profile/add_opinion.html', {'form':form,'add_opinion':request.GET.get('produkt')})
+        form.fields["hidden_input"].initial = request.GET.get('produkt')
+    return render(request, 'user_profile/add_opinion.html', {'form':form,'add_opinion':True})
