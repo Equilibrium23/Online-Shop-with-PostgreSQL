@@ -58,13 +58,14 @@ CREATE TABLE project.zwrot (
 
 
 CREATE TABLE project.adres (
-                id_adres INTEGER NOT NULL,
+                id_adres SERIAL NOT NULL,
                 id_uzytkownik INTEGER NOT NULL,
                 ulica VARCHAR NOT NULL,
                 miasto VARCHAR NOT NULL,
                 kod_pocztowy VARCHAR NOT NULL,
                 nr_domu INTEGER NOT NULL,
-                nr_mieszkania INTEGER,
+                nr_mieszkania INTEGER NOT NULL,
+                glowny_adres boolean NOT NULL,
                 CONSTRAINT id_adres PRIMARY KEY (id_adres)
 );
 

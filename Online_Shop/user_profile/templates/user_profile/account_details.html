@@ -1,6 +1,7 @@
 {% extends "user_profile/profile.html" %}
 {% block content %}
 {% load crispy_forms_tags %}
+{% load template_filters %}
 {% csrf_token %}
 <div id = "account_details_contener">
     <div id = 'account_details_form'>
@@ -10,6 +11,26 @@
             {{ form|crispy }}
             <button type="submit">Dodaj dane adresowe</button>
         </form>
+        {% if adressess %}
+            <table>
+                <tr>
+                    <td class = "cell">Ulica</td>
+                    <td class = "cell">Miasto</td>
+                    <td class = "cell">Kod pocztowy</td>
+                    <td class = "cell">Nr domu</td>
+                    <td class = "cell">Nr mieszkania</td>
+                </tr>
+            
+                {% for adress in adressess %}
+                    <tr>
+                        {% for info in adress|adress %}
+                            <td class = "cell">{{ info }}</td>
+                        {% endfor %}
+                            <td class = "cell"><a href="adress/?id_uzytkownik={{adress|access:1}}&id_adress={{adress|access:0}}">Ustaw jako glowny</a></td>
+                    </tr>
+                {% endfor %}
+            </table>    
+        {% endif %}
     </div>
     
 </div>

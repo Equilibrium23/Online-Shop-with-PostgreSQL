@@ -71,3 +71,7 @@
 .separator{
     height: 10px;
 }
+.opinion{
+    height: 300px;
+    overflow-y: auto;
+}

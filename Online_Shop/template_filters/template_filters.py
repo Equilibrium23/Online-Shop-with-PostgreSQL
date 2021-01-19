@@ -9,9 +9,17 @@ def lookupMAX(value, arg):
     return value.get(arg)[1]
 
 @register.filter(name='access')
-def lookupMAX(value, arg):
-    return value[arg]
+def access(value, arg):
+    try:
+        result = value[arg] 
+        return result
+    except:
+        return "" 
 
 @register.filter(name='access2')
-def lookupMAX(value, arg):
+def access2(value, arg):
     return value[arg][0]
+
+@register.filter(name='adress')
+def adress(value):
+    return value[2:-1]

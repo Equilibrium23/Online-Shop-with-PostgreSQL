@@ -36,5 +36,6 @@ urlpatterns = [
     path('logged/profile/opinions/', user_profile_views.user_opinions,name = "opinions"),
     path('logged/profile/opinion/', user_profile_views.add_opinion,name = "opinion"),
     path('logged/profile/account_details/', user_profile_views.account_details,name = "account_details"),
+    path('logged/profile/account_details/adress/', user_profile_views.set_main_adress,name = "adress"),
     path('logged/basket/<int:monitor_id>/', user_profile_views.add_item_to_basket,name = "basket"),
 ]

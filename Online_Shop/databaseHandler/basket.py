@@ -86,7 +86,6 @@ def get_user_orders(user_id):
         result.update({record[3]:[]})
     for record in mobile_records:
         result[record[3]].append([record[0],record[1],record[2],str(record[4])])
-    print(result)
     cur.close()
     con.close()
     return result

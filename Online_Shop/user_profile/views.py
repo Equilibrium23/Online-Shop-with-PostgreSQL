@@ -21,7 +21,8 @@ def basket(request):
     return render(request, 'user_profile/basket.html',{'koszyk':basket[:-1],'sum':basket[-1],'dostawa':delivery})
 
 def user_opinions(request):
-    return render(request, 'user_profile/user_opinions.html',{'user_opinions':True})
+    user_opinions = user_profile.get_user_opinions(request.session['user_id'])
+    return render(request, 'user_profile/user_opinions.html',{'user_opinions':user_opinions})
 
 def user_orders(request):
     user_orders = user_basket.get_user_orders(request.session['user_id'])
@@ -31,11 +32,12 @@ def account_details(request):
     if request.method == 'POST':
         form = forms.AccountDetailsForm(request.POST)
         if form.is_valid():
-            ### to do -> insert data
+            user_profile.add_account_details( request.session['user_id'],form.cleaned_data)
             return redirect('profile')
     else:
         form = forms.AccountDetailsForm()
-    return render(request, 'user_profile/account_details.html', {'form':form,'account_details':True})
+        adressess = user_profile.get_account_details( request.session['user_id'])
+    return render(request, 'user_profile/account_details.html', {'form':form,'account_details':True,'adressess':adressess})
 
 
 def add_item_to_basket(request,monitor_id):
@@ -57,3 +59,7 @@ def add_opinion(request):
         form = forms.OpinionForm()
         form.fields["hidden_input"].initial = request.GET.get('produkt')
     return render(request, 'user_profile/add_opinion.html', {'form':form,'add_opinion':True})
+
+def set_main_adress(request):
+    user_profile.set_adress(request.GET.get('id_uzytkownik'),request.GET.get('id_adress'))
+    return redirect('profile')
