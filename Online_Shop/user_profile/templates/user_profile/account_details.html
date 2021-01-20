@@ -27,6 +27,7 @@
                             <td class = "cell">{{ info }}</td>
                         {% endfor %}
                             <td class = "cell"><a href="adress/?id_uzytkownik={{adress|access:1}}&id_adress={{adress|access:0}}">Ustaw jako glowny</a></td>
+                            <td class = "cell"><a href="adress/delete/?id_uzytkownik={{adress|access:1}}&id_adress={{adress|access:0}}">Usun</a></td>
                     </tr>
                 {% endfor %}
             </table>    

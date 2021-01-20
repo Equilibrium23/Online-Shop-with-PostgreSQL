@@ -34,7 +34,6 @@ def get_all_opinions():
     for item,info in data.items():
         info[1]=average_grade[item]
 
-    print(data)
     cur.close()
     con.close()
     return data
@@ -70,3 +69,24 @@ def set_adress(id_uzytkownik,id_adress):
     con.commit()
     cur.close()
     con.close()
+
+def delete_adress(id_uzytkownik,id_adress):
+    con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
+    cur = con.cursor()
+    cur.execute('''DELETE FROM project.adres *
+                WHERE id_uzytkownik = {} and id_adres = {};
+    '''.format(id_uzytkownik,id_adress))
+    con.commit()
+    cur.close()
+    con.close()
+
+def make_return(form,id_uzytkownik):
+    pass
+    # con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
+    # cur = con.cursor()
+    # cur.execute('''DELETE FROM project.adres *
+    #             WHERE id_uzytkownik = {} and id_adres = {};
+    # '''.format(id_uzytkownik,id_adress))
+    # con.commit()
+    # cur.close()
+    # con.close()

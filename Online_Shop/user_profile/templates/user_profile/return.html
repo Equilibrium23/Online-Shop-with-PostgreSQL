@@ -1,0 +1,16 @@
+{% extends "user_profile/profile.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% load template_filters %}
+{% csrf_token %}
+<div id = "return_container">
+    <div id = 'return'>
+        <h1>Uzupelnij formularz zwrotu:</h1>
+        <form id = "form" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit">Zatwierdz i zglos zwrot</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

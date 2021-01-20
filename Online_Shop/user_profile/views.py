@@ -63,3 +63,19 @@ def add_opinion(request):
 def set_main_adress(request):
     user_profile.set_adress(request.GET.get('id_uzytkownik'),request.GET.get('id_adress'))
     return redirect('profile')
+
+
+def delete_user_adress(request):
+    user_profile.delete_adress(request.GET.get('id_uzytkownik'),request.GET.get('id_adress'))
+    return redirect('profile')
+
+def return_product(request):
+    if request.method == 'POST':
+        form = forms.ReturnForm(request.POST)
+        if form.is_valid():
+            user_profile.make_return(form.cleaned_data,request.session['user_id'])
+            return redirect('profile')
+    else:
+        form = forms.ReturnForm()
+        form.fields["hidden_input"].initial = request.GET.get('produkt')
+    return render(request, 'user_profile/return.html', {'form':form,'return':True})

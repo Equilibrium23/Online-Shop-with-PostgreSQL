@@ -33,9 +33,11 @@ urlpatterns = [
     path('logged/search/filter/', searching_views.filter_items,name = "search_filter"),
     path('logged/profile/', user_profile_views.profile,name = "profile"),
     path('logged/profile/orders', user_profile_views.user_orders,name = "orders"),
+    path('logged/profile/return/', user_profile_views.return_product,name = "return"),
     path('logged/profile/opinions/', user_profile_views.user_opinions,name = "opinions"),
     path('logged/profile/opinion/', user_profile_views.add_opinion,name = "opinion"),
     path('logged/profile/account_details/', user_profile_views.account_details,name = "account_details"),
     path('logged/profile/account_details/adress/', user_profile_views.set_main_adress,name = "adress"),
+    path('logged/profile/account_details/adress/delete/', user_profile_views.delete_user_adress,name = "delete"),
     path('logged/basket/<int:monitor_id>/', user_profile_views.add_item_to_basket,name = "basket"),
 ]
