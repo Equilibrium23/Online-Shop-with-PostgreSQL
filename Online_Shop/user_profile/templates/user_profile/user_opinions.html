@@ -2,21 +2,25 @@
 {% block content %}
 <div id = "user_opinions_container">
     <div id = 'user_opinions'>
-        <table>
-            <tr>
-                <td class = "opinion_cell">Nazwa produktu</td>
-                <td class = "opinion_cell">Twoja opinia</td>
-                <td class = "opinion_cell">Twoja ocena</td>
-            </tr>
-        
-            {% for opinion in user_opinions %}
+        {%  if user_opinions %}
+            <table>
+                
+                
                 <tr>
-                    {% for info in opinion %}
-                        <td class = "opinion_cell">{{ info }}</td>
-                    {% endfor %}
+                    <td class = "opinion_cell">Nazwa produktu</td>
+                    <td class = "opinion_cell">Twoja opinia</td>
+                    <td class = "opinion_cell">Twoja ocena</td>
                 </tr>
-            {% endfor %}
-        </table>    
+            
+                {% for opinion in user_opinions %}
+                    <tr>
+                        {% for info in opinion %}
+                            <td class = "opinion_cell">{{ info }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>    
+        {% endif %}
     </div>
 </div>
 {% endblock content %}

@@ -73,9 +73,18 @@ def return_product(request):
     if request.method == 'POST':
         form = forms.ReturnForm(request.POST)
         if form.is_valid():
-            user_profile.make_return(form.cleaned_data,request.session['user_id'])
+            # dodanie zwrotu jest do dopracowania
+            user_profile.make_return(form.cleaned_data,request.session['user_id'],request.GET.get('zamowienie'))
             return redirect('profile')
     else:
         form = forms.ReturnForm()
         form.fields["hidden_input"].initial = request.GET.get('produkt')
     return render(request, 'user_profile/return.html', {'form':form,'return':True})
+
+def logout(request):
+    try:
+        del request.session['user_id']
+        del request.session['redirect']
+    except KeyError:
+        pass
+    return redirect('login')

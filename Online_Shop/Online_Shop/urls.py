@@ -19,11 +19,12 @@ from register_and_login import views as register_and_login_views
 from user_profile import views as user_profile_views 
 from search_and_filter import views as searching_views 
 from home import views as home_views 
+from administration import views as administration_views 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_views.home, name = "home"),
+    path('admin_home/', administration_views.home, name = "administration"),
     path('login/', register_and_login_views.login,name = "login"),
     path('register/', register_and_login_views.register,name = "register"),
     path('logged/', user_profile_views.logged,name = "logged"),
@@ -32,6 +33,7 @@ urlpatterns = [
     path('logged/search/', searching_views .search_items,name = "search"),
     path('logged/search/filter/', searching_views.filter_items,name = "search_filter"),
     path('logged/profile/', user_profile_views.profile,name = "profile"),
+    path('logged/profile/logout/', user_profile_views.logout,name = "logout"),
     path('logged/profile/orders', user_profile_views.user_orders,name = "orders"),
     path('logged/profile/return/', user_profile_views.return_product,name = "return"),
     path('logged/profile/opinions/', user_profile_views.user_opinions,name = "opinions"),

@@ -80,13 +80,11 @@ def delete_adress(id_uzytkownik,id_adress):
     cur.close()
     con.close()
 
-def make_return(form,id_uzytkownik):
-    pass
-    # con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
-    # cur = con.cursor()
-    # cur.execute('''DELETE FROM project.adres *
-    #             WHERE id_uzytkownik = {} and id_adres = {};
-    # '''.format(id_uzytkownik,id_adress))
-    # con.commit()
-    # cur.close()
-    # con.close()
+def make_return(form,id_uzytkownik,id_szczegoly_zamowienia):
+    con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
+    cur = con.cursor()
+    query = '''SELECT project.utworz_zwrot({},{},\'{}\',{},{},\'{}\');'''.format(id_uzytkownik, form['delivery_type'], form['reason'], form['hidden_input'], id_szczegoly_zamowienia, 'xd')
+    cur.execute(query)
+    con.commit()
+    cur.close()
+    con.close()

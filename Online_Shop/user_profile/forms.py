@@ -30,9 +30,9 @@ CHOICES =(
 class ReturnForm(forms.Form):
     reason = forms.CharField(label = 'powod', max_length=1000)
     CHOICES2 = (
-            ('1','Reklamacja'),
-            ('2','Zwrot bez podania przyczyny'),
-            ('3','Rekojmia'),
+            ('Reklamacja','Reklamacja'),
+            ('Zwrot bez podania przyczyny','Zwrot bez podania przyczyny'),
+            ('Rekojmia','Rekojmia'),
             )
     return_type = forms.ChoiceField(label = 'typ', widget=forms.Select, choices=CHOICES2)
     delivery_type = forms.ChoiceField(label = 'dostawa', widget=forms.Select, choices=CHOICES)

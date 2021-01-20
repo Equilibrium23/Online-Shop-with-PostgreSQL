@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'search_and_filter.apps.SearchAndFilterConfig',
+    'administration.apps.AdministrationConfig',
     'user_profile.apps.UserProfileConfig',
     'home.apps.HomeConfig',
     'register_and_login.apps.RegisterAndLoginConfig',

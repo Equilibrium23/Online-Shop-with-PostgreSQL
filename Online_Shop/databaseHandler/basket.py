@@ -78,14 +78,14 @@ def delete_all_from_basket(user_id):
 def get_user_orders(user_id):
     con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
     cur = con.cursor()
-    delete_query = '''SELECT c.nazwa,a.id_monitor,a.ilosc,a.id_zamowienie,b.data_zlozenia, b.status_zamowienia  FROM project.monitor c,project.szczegoly_zamowienia a, project.zamowienie b WHERE b.id_zamowienie = a.id_zamowienie and b.id_uzytkownika = {} and c.id_monitor = a.id_monitor;'''.format(user_id)
+    delete_query = '''SELECT c.nazwa,a.id_monitor,a.ilosc,a.id_zamowienie,b.data_zlozenia, b.status_zamowienia,a.id_szczegoly_zamowienia  FROM project.monitor c,project.szczegoly_zamowienia a, project.zamowienie b WHERE b.id_zamowienie = a.id_zamowienie and b.id_uzytkownika = {} and c.id_monitor = a.id_monitor;'''.format(user_id)
     cur.execute(delete_query)
     mobile_records = cur.fetchall()
     result = {}
     for record in mobile_records:
         result.update({record[3]:[]})
     for record in mobile_records:
-        result[record[3]].append([record[0],record[1],record[2],str(record[4]),record[5]])
+        result[record[3]].append([record[0],record[1],record[2],str(record[4]),record[5],record[6]])
     cur.close()
     con.close()
     return result

@@ -53,6 +53,8 @@ CREATE TABLE project.zwrot (
                 sposob_zwrotu INTEGER NOT NULL,
                 id_produktu INTEGER NOT NULL,
                 powod_zwrotu VARCHAR NOT NULL,
+                typ_zwrotu VARCHAR NOT NULL,
+                status_zwrotu VARCHAR NOT NULL,
                 CONSTRAINT zwrot_pk PRIMARY KEY (id_zwrot)
 );
 
@@ -65,7 +67,7 @@ CREATE TABLE project.adres (
                 kod_pocztowy VARCHAR NOT NULL,
                 nr_domu INTEGER NOT NULL,
                 nr_mieszkania INTEGER NOT NULL,
-                glowny_adres boolean NOT NULL,
+                glowny_adres boolean DEFAULT FALSE NOT NULL,
                 CONSTRAINT id_adres PRIMARY KEY (id_adres)
 );
 
@@ -96,17 +98,19 @@ CREATE TABLE project.monitor (
 );
 
 CREATE TABLE project.szczegoly_zwrotu (
-                id_szczegoly_zwrotu VARCHAR NOT NULL,
+                id_szczegoly_zwrotu SERIAL NOT NULL,
                 id_monitor INTEGER NOT NULL,
                 id_zwrot INTEGER NOT NULL,
+                id_szczegoly_zamowienia INTEGER NOT NULL,
                 CONSTRAINT szczegoly_zwrotu_pk PRIMARY KEY (id_szczegoly_zwrotu)
 );
 
 
 CREATE TABLE project.szczegoly_zamowienia (
-                id_szczegoly_zamowienia VARCHAR NOT NULL,
+                id_szczegoly_zamowienia SERIAL NOT NULL,
                 id_monitor INTEGER NOT NULL,
                 id_zamowienie INTEGER NOT NULL,
+                ilosc INTEGER NOT NULL,
                 CONSTRAINT szczegoly_zamowienia_pk PRIMARY KEY (id_szczegoly_zamowienia)
 );
 
@@ -129,14 +133,6 @@ CREATE TABLE project.ocena (
                 ocena DOUBLE PRECISION NOT NULL,
                 CONSTRAINT ocena_pk PRIMARY KEY (id_ocena)
 );
-
-
-ALTER TABLE project.adres ADD CONSTRAINT pracownik_adres_fk
-FOREIGN KEY (id_uzytkownik)
-REFERENCES project.pracownik (id_pracownik)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
 
 ALTER TABLE project.monitor ADD CONSTRAINT producent_monitor_fk
 FOREIGN KEY (id_producent)
@@ -225,6 +221,14 @@ NOT DEFERRABLE;
 ALTER TABLE project.szczegoly_zwrotu ADD CONSTRAINT monitor_szczegoly_zwrotu_fk
 FOREIGN KEY (id_monitor)
 REFERENCES project.monitor (id_monitor)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+
+ALTER TABLE project.szczegoly_zwrotu ADD CONSTRAINT szczeguly_zamowienia_szczegoly_zwrotu_fk
+FOREIGN KEY (id_szczegoly_zamowienia)
+REFERENCES project.szczegoly_zamowienia (id_szczegoly_zamowienia)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
