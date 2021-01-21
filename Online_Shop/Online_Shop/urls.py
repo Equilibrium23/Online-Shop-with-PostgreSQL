@@ -23,7 +23,8 @@ from administration import views as administration_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('admin_home/', administration_views.home, name = "administration"),
+    path('admin_home/', administration_views.home, name = "admin_home"),
+    path('admin_home/logout/', administration_views.logout, name = "adm_logout"),
     path('admin_home/manage/', administration_views.manage, name = "manage"),
     path('login/', register_and_login_views.login,name = "login"),
     path('register/', register_and_login_views.register,name = "register"),
