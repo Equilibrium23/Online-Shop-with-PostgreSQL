@@ -1,3 +1,4 @@
+DROP schema project cascade;
 create schema project;
 
 create table project.pracownik
@@ -14,10 +15,11 @@ create table project.pracownik
 	stanowisko varchar not null
 );
 
+CREATE SEQUENCE project.default_producent START 100 MAXVALUE 200 INCREMENT 1;
 
 create table project.producent
 (
-	id_producent integer not null
+	id_producent integer not null default nextval('project.default_producent')
 		constraint producent_pk
 			primary key,
 	nazwa varchar not null,
@@ -71,10 +73,11 @@ create table project.zwrot
 	status_zwrotu varchar not null
 );
 
+CREATE SEQUENCE project.default_monitor START 1 MAXVALUE 99 INCREMENT 1;
 
 create table project.monitor
 (
-	id_monitor integer not null
+	id_monitor integer not null default nextval('project.default_monitor')
 		constraint id_monitor
 			primary key,
 	id_producent integer not null

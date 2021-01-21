@@ -37,6 +37,7 @@ urlpatterns = [
     path('logged/profile/logout/', user_profile_views.logout,name = "logout"),
     path('logged/profile/orders', user_profile_views.user_orders,name = "orders"),
     path('logged/profile/return/', user_profile_views.return_product,name = "return"),
+    path('logged/profile/returns/', user_profile_views.show_return_products,name = "returns"),
     path('logged/profile/opinions/', user_profile_views.user_opinions,name = "opinions"),
     path('logged/profile/opinion/', user_profile_views.add_opinion,name = "opinion"),
     path('logged/profile/account_details/', user_profile_views.account_details,name = "account_details"),

@@ -2,8 +2,8 @@ from django.shortcuts import render,redirect
 from databaseHandler import select_base
 from .forms import DeleteForm
 from .forms import InsertDostawa,InsertMonitor,InsertPracownik,InsertProducent,InsertZdjecie
-from .forms import AlterCenaDostawy,AlterCenaMonitora,AlterZamowienie,AlterZwrot
-from databaseHandler import admin_insert,admin_alter,admin_delete
+from .forms import UpdateCenaDostawy,UpdateCenaMonitora,UpdateZamowienie,UpdateZwrot
+from databaseHandler import admin_insert,admin_update,admin_delete
 
 def home(request):
     return render(request,'administration/admin.html')
@@ -60,36 +60,36 @@ def insert_form(request,resource):
     return render(request, 'administration/forms.html', {'form':form,'form_title':['insert',resource]})
 
 
-def alter_form(request,resource):
+def update_form(request,resource):
     if resource == 'zamowienie':
-        form = AlterZamowienie
+        form = UpdateZamowienie
         if request.method == 'POST':
-            form = AlterZamowienie(request.POST)
+            form = UpdateZamowienie(request.POST)
             if form.is_valid():
-                # insert
+                admin_update.update_zamowienie(form.cleaned_data)
                 return redirect('admin_home')
     elif resource == 'zwrot':
-        form = AlterZwrot
+        form = UpdateZwrot
         if request.method == 'POST':
-            form = AlterZwrot(request.POST)
+            form = UpdateZwrot(request.POST)
             if form.is_valid():
-                # insert
+                admin_update.update_zwrot(form.cleaned_data)
                 return redirect('admin_home')
     elif resource == 'monitor':
-        form = AlterCenaMonitora
+        form = UpdateCenaMonitora
         if request.method == 'POST':
-            form = AlterCenaMonitora(request.POST)
+            form = UpdateCenaMonitora(request.POST)
             if form.is_valid():
-                # insert
+                admin_update.update_monitor(form.cleaned_data)
                 return redirect('admin_home')
     elif resource == 'dostawa':
-        form = AlterCenaDostawy
+        form = UpdateCenaDostawy
         if request.method == 'POST':
-            form = AlterCenaDostawy(request.POST)
+            form = UpdateCenaDostawy(request.POST)
             if form.is_valid():
-                # insert
+                admin_update.update_dostawa(form.cleaned_data)
                 return redirect('admin_home')
-    return render(request, 'administration/forms.html', {'form':form,'form_title':['alter',resource]})
+    return render(request, 'administration/forms.html', {'form':form,'form_title':['update',resource]})
 
 def manage(request):
     method = request.GET.get('method')
@@ -100,11 +100,11 @@ def manage(request):
         resource = request.GET.get('resource')
         if method == 'insert':
             return insert_form(request,resource)
-        elif method == 'alter':
-            return alter_form(request,resource)
+        elif method == 'update':
+            return update_form(request,resource)
         elif method == 'delete':
             return delete_form(request,resource)
-    return redirect('opinions')
+    return redirect('admin_home')
 
 def logout(request):
     del request.session['staff_id']

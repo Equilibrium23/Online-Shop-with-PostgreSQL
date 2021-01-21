@@ -88,3 +88,7 @@ def logout(request):
     except KeyError:
         pass
     return redirect('login')
+
+def show_return_products(request):
+    returns = user_profile.get_user_returns(request.session['user_id'])
+    return render(request,'user_profile/returns.html',{'returns':returns})

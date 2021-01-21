@@ -20,7 +20,7 @@ def login(request):
             if status[0] == True:
                 if status[2] == 'stuff':
                     set_staff_session(request,form.cleaned_data)
-                    return redirect('administration')
+                    return redirect('admin_home')
                 else:
                     set_user_session(request,form.cleaned_data)
                     return redirect('logged')

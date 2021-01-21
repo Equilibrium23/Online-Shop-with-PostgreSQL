@@ -88,3 +88,13 @@ def make_return(form,id_uzytkownik,id_szczegoly_zamowienia):
     con.commit()
     cur.close()
     con.close()
+
+def get_user_returns(user_id):
+    con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
+    cur = con.cursor()
+    query = '''SELECT b.nazwa, a.sposob_zwrotu, a.powod_zwrotu, a.typ_zwrotu, a.status_zwrotu FROM project.zwrot a, project.szczegoly_zwrotu b WHERE a.id_zwrot = b.id_zwrot AND a.id_kilent = {};'''.format(user_id)
+    cur.execute(query)
+    mobile_records = cur.fetchall()
+    print(mobile_records)
+    cur.close()
+    con.close()
