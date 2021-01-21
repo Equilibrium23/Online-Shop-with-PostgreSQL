@@ -18,13 +18,13 @@ from django.urls import path, register_converter
 from register_and_login import views as register_and_login_views 
 from user_profile import views as user_profile_views 
 from search_and_filter import views as searching_views 
-from home import views as home_views 
 from administration import views as administration_views 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('admin_home/', administration_views.home, name = "administration"),
+    path('admin_home/manage/', administration_views.manage, name = "manage"),
     path('login/', register_and_login_views.login,name = "login"),
     path('register/', register_and_login_views.register,name = "register"),
     path('logged/', user_profile_views.logged,name = "logged"),

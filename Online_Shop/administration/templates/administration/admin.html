@@ -1,4 +1,35 @@
-<h1>
-
-    elo
-</h1>
+{% load static %}
+<!doctype html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'administration/base.css' %}">
+    {% if select %}
+        <link rel="stylesheet" type="text/css" href="{% static 'administration/db.css' %}">
+    {% endif %}
+</head>
+<body>
+    <main>
+        <div id = "navbar">
+            <h1>INSERT:</h1>
+                <p> <a href="/admin_home/manage/?method=insert&resource=pracownik">dodaj pracownika</a> </p>
+                <p> <a href="/admin_home/manage/?method=insert&resource=monitor">dodaj monitor</a> </p>
+                <p> <a href="/admin_home/manage/?method=insert&resource=producent">dodaj producenta</a> </p>
+                <p> <a href="/admin_home/manage/?method=insert&resource=zdjecie">dodaj zdjecie monitora</a> </p>
+                <p> <a href="/admin_home/manage/?method=insert&resource=dostawa">dodaj typ dostawy</a> </p>
+            <h1>ALTER:</h1>
+                <p> <a href="/admin_home/manage/?method=alter&resource=zamowienie">zmien status zamowienia</a> </p>
+                <p> <a href="/admin_home/manage/?method=alter&resource=zwrot">zmien status zwrotu</a> </p>
+                <p> <a href="/admin_home/manage/?method=alter&resource=monitor">zmien cene monitora</a> </p>
+                <p> <a href="/admin_home/manage/?method=alter&resource=dostawa">zmien cene dostawy</a> </p>
+            <h1>DELETE:</h1>
+                <p> <a href="/admin_home/manage/?method=delete&resource=pracownik">usun pracowinka</a> </p>
+                <p> <a href="/admin_home/manage/?method=delete&resource=monitor">usun monitor</a> </p>
+            <h1>SELECT:</h1>
+                <p> <a href="/admin_home/manage/?method=select">Pokaz baze</a> </p>
+        </div>
+        <div id = "content">
+            {% block content %}{% endblock %}
+        </div>
+        
+    </main>
+</body>
