@@ -1,4 +1,5 @@
 from django import forms
+from django.forms.widgets import DateTimeInput
 
 class DeleteForm(forms.Form):
     resource_id = forms.IntegerField(label = 'id', max_value=999, min_value = 1)
@@ -10,7 +11,8 @@ class InsertPracownik(forms.Form):
     email = forms.EmailField()
     nazwisko = forms.CharField(label = 'nazwisko', max_length=1000)
     login = forms.CharField(label = 'login', max_length=1000)
-    data_zatrudnienia = forms.DateField(label = "data_zatrudnienia w formacie Y-M-D" ,input_formats=['%Y-%m-%d'])
+    
+    data_zatrudnienia = forms.DateTimeField( label = "data dodania" ,input_formats=['%Y-%m-%d'],widget =forms.SelectDateWidget)
     stanowisko = forms.CharField(label = 'stanowisko', max_length=1000)
 
 class InsertMonitor(forms.Form):
@@ -35,7 +37,7 @@ class InsertProducent(forms.Form):
 class InsertZdjecie(forms.Form):
     id_monitor = forms.IntegerField(label = 'id_monitor', max_value=999, min_value = 1)
     nazwa = forms.CharField(label = 'nazwa', max_length=1000)
-    data_dodania = forms.DateField(label = "data_dodania w formacie Y-M-D" ,input_formats=['%Y-%m-%d'])
+    data_dodania = forms.DateTimeField( label = "data dodania" ,input_formats=['%Y-%m-%d'],widget=forms.SelectDateWidget)
     image = forms.ImageField(label = 'zdjecie')
 
 class InsertDostawa(forms.Form):
