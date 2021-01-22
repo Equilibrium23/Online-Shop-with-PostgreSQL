@@ -23,3 +23,7 @@ def access2(value, arg):
 @register.filter(name='adress')
 def adress(value):
     return value[2:-1]
+
+@register.filter(name='return_template')
+def return_template(value):
+    return value[:-1]

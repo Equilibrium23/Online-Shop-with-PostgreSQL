@@ -19,9 +19,11 @@ from register_and_login import views as register_and_login_views
 from user_profile import views as user_profile_views 
 from search_and_filter import views as searching_views 
 from administration import views as administration_views 
+from home import views as home_views
 
 
 urlpatterns = [
+    path('', home_views.home, name = "home"),
     path('admin/', admin.site.urls),
     path('admin_home/', administration_views.home, name = "admin_home"),
     path('admin_home/logout/', administration_views.logout, name = "adm_logout"),

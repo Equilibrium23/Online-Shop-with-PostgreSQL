@@ -83,18 +83,26 @@ def delete_adress(id_uzytkownik,id_adress):
 def make_return(form,id_uzytkownik,id_szczegoly_zamowienia):
     con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
     cur = con.cursor()
-    query = '''SELECT project.utworz_zwrot({},{},\'{}\',{},{},\'{}\');'''.format(id_uzytkownik, form['delivery_type'], form['reason'], form['hidden_input'], id_szczegoly_zamowienia, 'xd')
+    query = ''' SELECT * FROM project.szczegoly_zwrotu WHERE id_szczegoly_zamowienia = {};'''.format(id_szczegoly_zamowienia)
     cur.execute(query)
+    old_row = cur.fetchone()
+    if  old_row is None:
+        query = '''SELECT project.utworz_zwrot({},{},\'{}\',{},{},\'{}\');'''.format(id_uzytkownik, form['delivery_type'], form['reason'], form['hidden_input'], id_szczegoly_zamowienia, form['return_type'])
+        cur.execute(query)
+    else:
+        query = '''UPDATE project.szczegoly_zwrotu SET ilosc = {} WHERE id_szczegoly_zamowienia = {}'''.format( old_row[4]+1, id_szczegoly_zamowienia )
+        cur.execute(query)
     con.commit()
     cur.close()
     con.close()
 
+    
 def get_user_returns(user_id):
     con = psycopg2.connect(database=settings.DATABASE['NAME'], user=settings.DATABASE['USER'], password=settings.DATABASE['PASSWORD'], host=settings.DATABASE['HOST'], port=settings.DATABASE['PORT'])
     cur = con.cursor()
-    query = '''SELECT b.nazwa, a.sposob_zwrotu, a.powod_zwrotu, a.typ_zwrotu, a.status_zwrotu FROM project.zwrot a, project.szczegoly_zwrotu b WHERE a.id_zwrot = b.id_zwrot AND a.id_kilent = {};'''.format(user_id)
+    query = '''SELECT c.nazwa,b.ilosc, a.powod_zwrotu, a.typ_zwrotu, a.status_zwrotu,a.data_zlozenia FROM project.zwrot a, project.szczegoly_zwrotu b, project.monitor c WHERE a.id_zwrot = b.id_zwrot AND b.id_monitor = c.id_monitor AND a.id_klient = {};'''.format(user_id)
     cur.execute(query)
     mobile_records = cur.fetchall()
-    print(mobile_records)
     cur.close()
     con.close()
+    return mobile_records

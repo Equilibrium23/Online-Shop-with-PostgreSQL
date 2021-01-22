@@ -91,4 +91,4 @@ def logout(request):
 
 def show_return_products(request):
     returns = user_profile.get_user_returns(request.session['user_id'])
-    return render(request,'user_profile/returns.html',{'returns':returns})
+    return render(request,'user_profile/returns.html',{'returns':returns,'user_opinions':True})

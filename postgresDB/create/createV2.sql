@@ -70,7 +70,9 @@ create table project.zwrot
 			references project.typ_dostawy,
 	powod_zwrotu varchar not null,
 	typ_zwrotu varchar not null,
-	status_zwrotu varchar not null
+	status_zwrotu varchar not null,
+	data_zlozenia date not null
+
 );
 
 CREATE SEQUENCE project.default_monitor START 1 MAXVALUE 99 INCREMENT 1;
@@ -182,6 +184,7 @@ create table project.szczegoly_zwrotu
 	id_zwrot integer not null
 		constraint zwrot_szczegoly_zwrotu_fk
 			references project.zwrot,
+	ilosc INTEGER NOT NULL DEFAULT 1,
 	id_szczegoly_zamowienia integer not null
 		constraint szczeguly_zamowienia_szczegoly_zwrotu_fk
 			references project.szczegoly_zamowienia
@@ -259,7 +262,7 @@ $$
 
         suma_z_dostawa := (SELECT cena_dostawy FROM project.typ_dostawy WHERE id_typu_dostawy = id_dostawy);
         suma_z_dostawa = suma_z_dostawa + suma;
-        ilosc_przedmiotow = COUNT(*) FROM project.koszyk WHERE id_uzytkownik = id_uzytkownika;
+        ilosc_przedmiotow = sum(ilosc) FROM project.koszyk WHERE id_uzytkownik = id_uzytkownika;
         INSERT INTO project.zamowienie VALUES(id_zamowienie,id_uzytkownika,id_dostawy,status,suma_z_dostawa,ilosc_przedmiotow,data);
 
         FOR wiersz IN SELECT id_monitor,ilosc FROM project.koszyk WHERE id_uzytkownik = id_uzytkownika
@@ -276,7 +279,28 @@ $$
         id_zwrot INTEGER;
     BEGIN
         SELECT into id_zwrot nextval('project.seq_zwrot');
-        INSERT INTO project.zwrot VALUES(id_zwrot,id_uzytkownika,id_dostawy,powod,typ_zwrotu,'W trakcie realizacji');
+        INSERT INTO project.zwrot VALUES(id_zwrot,id_uzytkownika,id_dostawy,powod,typ_zwrotu,'W trakcie realizacji',now());
         INSERT INTO project.szczegoly_zwrotu VALUES(DEFAULT,id_przedmiotu,id_zwrot,id_szczegoly_zamowienia);
     END; 
 $$ LANGUAGE plpgsql;
+
+
+
+create or REPLACE function zwrot_trigger() returns TRIGGER
+language plpgsql
+as
+$$
+	DECLARE
+        max_ilosc INTEGER;
+    BEGIN
+		SELECT into max_ilosc ilosc FROM project.szczegoly_zamowienia  WHERE id_szczegoly_zamowienia = new.id_szczegoly_zamowienia;  
+		if ( new.ilosc <= max_ilosc ) THEN
+			RETURN NEW;
+		ELSE
+			RAISE NOTICE 'przekroczona ilosc';
+			RETURN NULL;
+		END IF;
+    END;
+$$;
+
+CREATE trigger szczeg_zwrotu_trigger BEFORE UPDATE ON project.szczegoly_zwrotu FOR EACH ROW EXECUTE PROCEDURE zwrot_trigger();

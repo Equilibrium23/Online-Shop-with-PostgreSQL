@@ -1,0 +1,27 @@
+{% extends "user_profile/profile.html" %}
+{% block content %}
+{% load template_filters %}
+{% csrf_token %}
+<div id = "user_opinions_container">
+    <div id = 'user_opinions'>
+
+        {% for return in returns %}
+            <h1>Zwrot z dnia : {{return|access:-1}}</h1>
+            <table>
+                <tr>
+                    <td class = "opinion_cell">Nazwa produktu</td>
+                    <td class = "opinion_cell">Ilosc</td>
+                    <td class = "opinion_cell">Powod zwrotu</td>
+                    <td class = "opinion_cell">Typ zwrotu</td>
+                    <td class = "opinion_cell">Status Zwrotu</td>
+                </tr>
+                <tr>
+                    {% for info in return|return_template %}
+                        <td class = "opinion_cell">{{info}}</td>
+                    {% endfor %}
+                </tr>
+            </table>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
