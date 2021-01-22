@@ -1,0 +1,7 @@
+.db_cell{
+    width: 220px;
+}
+#db_container{
+    overflow-y: auto;
+    height: 800px;
+}
