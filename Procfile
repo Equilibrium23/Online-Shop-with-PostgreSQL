@@ -1,1 +1,1 @@
-web: gunicorn Walk_For_The_Dog.wsgi
+web: gunicorn Online_Shop.wsgi
