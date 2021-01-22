@@ -139,3 +139,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'databaseHandler/static/'),
 )
 
+django_heroku.settings(locals())
