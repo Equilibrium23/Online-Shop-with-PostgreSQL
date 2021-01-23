@@ -8,8 +8,8 @@ create table project.pracownik
 			primary key,
 	imie varchar not null,
 	nazwisko varchar not null,
-	email varchar not null,
-	login varchar not null,
+	email varchar not null unique,
+	login varchar not null unique,
 	haslo varchar not null,
 	data_zatrudnienia date not null,
 	stanowisko varchar not null
@@ -22,11 +22,11 @@ create table project.producent
 	id_producent integer not null default nextval('project.default_producent')
 		constraint producent_pk
 			primary key,
-	nazwa varchar not null,
+	nazwa varchar not null unique,
 	adres_firmy varchar not null,
-	nip varchar not null,
-	email varchar not null,
-	nr_telefonu varchar not null
+	nip  varchar not null unique,
+	email varchar,
+	nr_telefonu varchar
 );
 
 
@@ -46,14 +46,11 @@ create table project.klient
 	id_klient serial not null
 		constraint id
 			primary key,
-	typ_uzytkownika varchar not null,
 	imie varchar not null,
 	nazwisko varchar not null,
-	login varchar not null,
+	login  varchar not null unique,
 	haslo varchar not null,
-	email varchar not null,
-	constraint klient_login_email_key
-		unique (login, email)
+	email  varchar not null unique
 );
 
 
@@ -85,7 +82,7 @@ create table project.monitor
 	id_producent integer not null
 		constraint producent_monitor_fk
 			references project.producent,
-	nazwa varchar not null,
+	nazwa  varchar not null unique,
 	cena double precision not null,
 	przekatna_ekranu double precision not null,
 	rozdzielczosc varchar not null,

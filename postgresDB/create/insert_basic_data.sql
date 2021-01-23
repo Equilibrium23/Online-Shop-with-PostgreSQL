@@ -1,7 +1,7 @@
 -- pracownik
-INSERT INTO project.pracownik VALUES(DEFAULT,'Tomasz','Kowalski','tomasz.kowalski@gmail.com','tomasz.kowalski','pracownik1','11-10-2020','specjalista ds. zamowien');
-INSERT INTO project.pracownik VALUES(DEFAULT,'Marek','Iwan','marek.iwan@gmail.com','marek.iwan','pracownik2','10-08-2020','specjalista ds. zamowien i zwrotow');
-INSERT INTO project.pracownik VALUES(DEFAULT,'Filip','Kowalski','filip.kowalski@gmail.com','filip.kowalski','pracownik3','02-03-2020','administrator kont');
+INSERT INTO project.pracownik VALUES(DEFAULT,'Tomasz','Kowalski','tomasz.kowalski@gmail.com','tomasz.kowalski','admin','11-10-2020','specjalista ds. zamowien');
+INSERT INTO project.pracownik VALUES(DEFAULT,'Marek','Iwan','marek.iwan@gmail.com','marek.iwan','admin','10-08-2020','specjalista ds. zamowien i zwrotow');
+INSERT INTO project.pracownik VALUES(DEFAULT,'Filip','Kowalski','filip.kowalski@gmail.com','filip.kowalski','admin','02-03-2020','administrator kont');
 -- producent
 INSERT INTO project.producent VALUES(1,'MSI','Zhonghe, Tajpej, Tajwan','1234','serwis@msi.com','(+800) 080 990');
 INSERT INTO project.producent VALUES(2,'BenQ','Tajpej, Tajwan','12345','0-62-766-77-71');
@@ -25,7 +25,7 @@ INSERT INTO project.Monitor VALUES(nextval('project.benq_id_generator'),2,'BenQ 
 INSERT INTO project.Monitor VALUES(nextval('project.acer_id_generator'),3,'Acer Nitro VG240YBMIIX',600,23.8,'1920x1080',75,'IPS',250);
 INSERT INTO project.Monitor VALUES(nextval('project.acer_id_generator'),3,'Acer Predator XB273GPBMIIPRZX',1500,27,'1920x1080',144,'IPS',400);
 INSERT INTO project.Monitor VALUES(nextval('project.acer_id_generator'),3,'Acer EK220QABI',400,23.8,'1920x1080',75,'VA',250);
-INSERT INTO project.Monitor VALUES(nextval('project.acer_id_generator'),3,'Acer Nitro VG240YUBMIIPX',23.8,23.8,'1920x1080',75,'IPS',300);
+INSERT INTO project.Monitor VALUES(nextval('project.acer_id_generator'),3,'Acer Nitro VG240YUBMIIPX',600,23.8,'1920x1080',75,'IPS',300);
 ---------------------- Samsung
 INSERT INTO project.Monitor VALUES(nextval('project.samsung_id_generator'),4,'Samsung C24RG50FQUX',900,23.5,'1920x1080',144,'VA',250);
 INSERT INTO project.Monitor VALUES(nextval('project.samsung_id_generator'),4,'Samsung C27F591FDUX',1200,27,'1920x1080',60,'VA',250);
