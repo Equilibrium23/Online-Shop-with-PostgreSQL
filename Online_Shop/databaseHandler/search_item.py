@@ -20,13 +20,16 @@ def get_all_resolution():
 
 
 
-
 def create_data_from_fetch(mobile_records,cursor):
     column_names = [column[0] for column in cursor.description]
+    cursor.execute("SELECT id_monitora,nazwa_zdjecia FROM project.galeria;")
+    temp = cursor.fetchall()
+    pictures = {info[0]:info[1] for info in temp}
     data = [{} for _ in range(len(mobile_records))]
     for i in range(len(mobile_records)):
         for j in range(len(mobile_records[i])):
             data[i][column_names[j]] = mobile_records[i][j]
+        data[i]['path'] = pictures[data[i]['id_monitor']]
     return data
 
 

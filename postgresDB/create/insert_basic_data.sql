@@ -4,12 +4,12 @@ INSERT INTO project.pracownik VALUES(DEFAULT,'Marek','Iwan','marek.iwan@gmail.co
 INSERT INTO project.pracownik VALUES(DEFAULT,'Filip','Kowalski','filip.kowalski@gmail.com','filip.kowalski','pracownik3','02-03-2020','administrator kont');
 -- producent
 INSERT INTO project.producent VALUES(1,'MSI','Zhonghe, Tajpej, Tajwan','1234','serwis@msi.com','(+800) 080 990');
-INSERT INTO project.producent VALUES(2,'BenQ','Tajpej, Tajwan','1234','-----','0-62-766-77-71');
-INSERT INTO project.producent VALUES(3,'Acer','Nowe Tajpej, Tajwan','1234','contact.pl@acer.com','022 209 89 78');
-INSERT INTO project.producent VALUES(4,'Samsung','Seul, Korea Południowa','1234','-----','+48 22 607-93-33');
-INSERT INTO project.producent VALUES(5,'iiyama','Chūō, Tokio, Japonia','1234','-----','+48 717 151 857');
-INSERT INTO project.producent VALUES(6,'AOC','Tajpej, Tajwan','1234','-----','22 113 40 88');
-INSERT INTO project.producent VALUES(7,'LG','Seul, Korea Południowa','1234','-----','801-54-54-54');
+INSERT INTO project.producent VALUES(2,'BenQ','Tajpej, Tajwan','12345','0-62-766-77-71');
+INSERT INTO project.producent VALUES(3,'Acer','Nowe Tajpej, Tajwan','12346','contact.pl@acer.com','022 209 89 78');
+INSERT INTO project.producent VALUES(4,'Samsung','Seul, Korea Południowa','12347','+48 22 607-93-33');
+INSERT INTO project.producent VALUES(5,'iiyama','Chūō, Tokio, Japonia','12348','+48 717 151 857');
+INSERT INTO project.producent VALUES(6,'AOC','Tajpej, Tajwan','12349','22 113 40 88');
+INSERT INTO project.producent VALUES(7,'LG','Seul, Korea Południowa','1235','801-54-54-54');
 -- monitor
 ---------------------- MSI
 INSERT INTO project.Monitor VALUES(nextval('project.msi_id_generator'),1,'MSI Optix G241VC',699,23.6,'1920x1080',75,'IPS',250);
@@ -50,3 +50,32 @@ INSERT INTO project.Monitor VALUES(nextval('project.lg_id_generator'),7,'LG 27GL
 INSERT INTO project.typ_dostawy VALUES(DEFAULT,'paczkomat',10,'Inpost');
 INSERT INTO project.typ_dostawy VALUES(DEFAULT,'kurier',12,'DPS');
 INSERT INTO project.typ_dostawy VALUES(DEFAULT,'poczta',20,'Poczta Polska');
+----- galeria
+INSERT INTO project.galeria VALUES(DEFAULT,100,'msi/MSI Optix G241VC.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,101,'msi/MSI Optix G24C4.png','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,102,'msi/MSI Optix G27C4.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,103,'msi/MSI Optix G271.png','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,200,'benq/BenQ EL2870U.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,201,'benq/BenQ ZOWIE XL2411P.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,202,'benq/BenQ PD3200U.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,203,'benq/BenQ MOBIUZ EX2710.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,300,'acer/Acer Nitro VG240YBMIIX.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,301,'acer/Acer Predator XB273GPBMIIPRZX.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,302,'acer/Acer EK220QABI.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,303,'acer/Acer Nitro VG240YUBMIIPX.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,400,'samsung/Samsung C24RG50FQUX.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,401,'samsung/Samsung C27F591FDUX.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,402,'samsung/Samsung C49HG90DMUX.png','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,403,'samsung/Samsung Odyssey C27G75TQSUX.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,500,'iiyama/iiyama G-Master GB2530HSU.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,501,'iiyama/iiyama G-Master GB2730QSU.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,502,'iiyama/iiyama XUB2792QSU.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,503,'iiyama/iiyama XUB2792UHSU-B1 4K.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,600,'aoc/AOC 27G2U.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,601,'aoc/AOC 22V2Q.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,602,'aoc/AOC Q3279VWF.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,603,'aoc/AOC CQ32G1.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,700,'lg/LG 27GL63T-B HDR10.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,701,'lg/LG 27GL850-B NanoIPS.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,702,'lg/LG 24MP59G.jpg','2021-01-01');
+INSERT INTO project.galeria VALUES(DEFAULT,703,'lg/LG 27GL83A-B.jpg','2021-01-01');
