@@ -91,7 +91,8 @@ create table project.monitor
 	rozdzielczosc varchar not null,
 	odswiezanie integer not null,
 	matryca varchar not null,
-	max_jasnosc integer not null
+	max_jasnosc integer not null,
+	ilosc integer not null default 100
 );
 
 
@@ -280,7 +281,7 @@ $$
     BEGIN
         SELECT into id_zwrot nextval('project.seq_zwrot');
         INSERT INTO project.zwrot VALUES(id_zwrot,id_uzytkownika,id_dostawy,powod,typ_zwrotu,'W trakcie realizacji',now());
-        INSERT INTO project.szczegoly_zwrotu VALUES(DEFAULT,id_przedmiotu,id_zwrot,id_szczegoly_zamowienia);
+        INSERT INTO project.szczegoly_zwrotu VALUES(DEFAULT,id_przedmiotu,id_zwrot,DEFAULT,id_szczegoly_zamowienia);
     END; 
 $$ LANGUAGE plpgsql;
 
@@ -304,3 +305,49 @@ $$
 $$;
 
 CREATE trigger szczeg_zwrotu_trigger BEFORE UPDATE ON project.szczegoly_zwrotu FOR EACH ROW EXECUTE PROCEDURE zwrot_trigger();
+
+
+
+
+create or REPLACE function zamowienie_trigger() returns TRIGGER
+language plpgsql
+as
+$$
+	DECLARE
+        max_ilosc INTEGER;
+    BEGIN
+		SELECT into max_ilosc ilosc FROM project.monitor  WHERE id_monitor = new.id_monitor;  
+		if ( new.ilosc <= max_ilosc ) THEN
+			UPDATE project.monitor SET ilosc = max_ilosc-new.ilosc WHERE id_monitor = new.id_monitor;
+			RETURN NEW;
+		ELSE
+			RAISE NOTICE 'przekroczona ilosc';
+			RETURN NULL;
+		END IF;
+    END;
+$$;
+
+CREATE trigger szczeg_zamowienia_trigger BEFORE INSERT ON project.szczegoly_zamowienia FOR EACH ROW EXECUTE PROCEDURE zamowienie_trigger();
+
+
+
+
+create or REPLACE function zakonczony_zwrot() returns TRIGGER
+language plpgsql
+as
+$$
+	DECLARE
+        id INTEGER;
+        dodatkowa_ilosc INTEGER;
+		max_ilosc INTEGER;
+    BEGIN
+		SELECT into id,dodatkowa_ilosc id_monitor,ilosc FROM project.szczegoly_zwrotu WHERE id_zwrot = new.id_zwrot; 
+		SELECT into max_ilosc ilosc FROM project.monitor WHERE id_monitor = id; 
+		if ( new.status_zwrotu = 'Zrealizowane' ) THEN
+			UPDATE project.monitor SET ilosc = max_ilosc+dodatkowa_ilosc WHERE id_monitor = id;
+		END IF;
+		RETURN NEW;
+    END;
+$$;
+
+CREATE trigger koniec_zwrotu_trigger BEFORE UPDATE ON project.zwrot FOR EACH ROW EXECUTE PROCEDURE zakonczony_zwrot();

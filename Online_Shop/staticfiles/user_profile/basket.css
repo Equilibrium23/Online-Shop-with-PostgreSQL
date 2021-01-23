@@ -1,0 +1,13 @@
+#basket_container{
+    text-align: center;
+    background-color: aliceblue;
+    border-radius: 50px;
+    font-size: xx-large;
+
+}
+.basket_cell{
+    width: 300px;
+}
+table{
+    margin-left: 14%;
+}

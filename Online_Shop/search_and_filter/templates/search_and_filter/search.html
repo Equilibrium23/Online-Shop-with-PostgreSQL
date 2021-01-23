@@ -62,37 +62,40 @@
     </div>
     <div id = "display_items">
         {% for screen in data%} 
-            <div class = "display_screen">
-                <div class = 'buy'>
-                    <form action="{% url 'basket' screen.id_monitor %}" method="POST">
-                        {% csrf_token %}
-                         <button type="submit" name='mybtn2'>Dodaj do koszyka</button>
-                    </form>
+            {% if screen.ilosc > 0 %}
+                <div class = "display_screen">
+                    <div class = 'buy'>
+                        <form action="{% url 'basket' screen.id_monitor %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" name='mybtn2'>Dodaj do koszyka</button>
+                        </form>
+                    </div>
+                    <div class = "screen_image">
+                        <img src="{% static screen.path|picture %}">
+                    </div>
+                    <div class = "description">
+                        <p> <b class ="screen_data">Model:</b>  {{ screen.nazwa }}</p>
+                        <p> <b class ="screen_data">Cena:</b>  {{ screen.cena }}</p>
+                        <p> <b class ="screen_data">Przekatna ekranu:</b>  {{ screen.przekatna_ekranu }}</p>
+                        <p> <b class ="screen_data">Rozdzielczosc:</b>  {{ screen.rozdzielczosc }}</p>
+                        <p> <b class ="screen_data">Czas Reakcji (ms):</b>  {{ screen.odswiezanie }}</p>
+                        <p> <b class ="screen_data">Matryca:</b>  {{ screen.matryca }}</p>
+                        <p> <b class ="screen_data">Max jasnosc (cd/m²):</b>  {{ screen.max_jasnosc }}</p>
+                        <p> <b class ="screen_data">Dostepna ilosc :</b>  {{ screen.ilosc }}</p>
+                    </div>
+                    <div class = "opinion">
+                        <p>Srednia ocena: {{ opinions|access:screen.id_monitor |access:1 }}</p>
+                        {% for id,info in opinions.items %}
+                            {% if id == screen.id_monitor %}
+                                {% for opinion in info|access:0 %}
+                                    <p>{{opinion}}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class = "blank"></div>
                 </div>
-                <div class = "screen_image">
-                    <img src="{% static screen.path|picture %}">
-                </div>
-                <div class = "description">
-                    <p> <b class ="screen_data">Model:</b>  {{ screen.nazwa }}</p>
-                    <p> <b class ="screen_data">Cena:</b>  {{ screen.cena }}</p>
-                    <p> <b class ="screen_data">Przekatna ekranu:</b>  {{ screen.przekatna_ekranu }}</p>
-                    <p> <b class ="screen_data">Rozdzielczosc:</b>  {{ screen.rozdzielczosc }}</p>
-                    <p> <b class ="screen_data">Czas Reakcji (ms):</b>  {{ screen.odswiezanie }}</p>
-                    <p> <b class ="screen_data">Matryca:</b>  {{ screen.matryca }}</p>
-                    <p> <b class ="screen_data">Max jasnosc (cd/m²):</b>  {{ screen.max_jasnosc }}</p>
-                </div>
-                <div class = "opinion">
-                    <p>Srednia ocena: {{ opinions|access:screen.id_monitor |access:1 }}</p>
-                    {% for id,info in opinions.items %}
-                        {% if id == screen.id_monitor %}
-                            {% for opinion in info|access:0 %}
-                                <p>{{opinion}}</p>
-                            {% endfor %}
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                <div class = "blank"></div>
-            </div>
+            {% endif %}
             <div class = 'separator'></div>
         {% endfor %}
     </div>

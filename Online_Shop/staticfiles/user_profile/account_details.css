@@ -1,0 +1,14 @@
+#account_details_contener{
+    margin-top: -10%;
+    background-color: aliceblue;
+    border-radius: 50px;
+}
+#account_details_form{
+    margin-left: 10%;
+}
+.form{
+    font-size: xx-large;
+}
+.cell{
+    width: 150px;
+}
