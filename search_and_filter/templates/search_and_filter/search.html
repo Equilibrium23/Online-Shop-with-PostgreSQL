@@ -70,9 +70,11 @@
                             <button type="submit" name='mybtn2'>Dodaj do koszyka</button>
                         </form>
                     </div>
-                    <div class = "screen_image">
-                        <img src="{% static screen.path|picture %}">
-                    </div>
+                    {% if screen.path %}
+                        <div class = "screen_image">
+                            <img src="{% static screen.path|picture %}">
+                        </div>
+                    {%endif%}
                     <div class = "description">
                         <p> <b class ="screen_data">Model:</b>  {{ screen.nazwa }}</p>
                         <p> <b class ="screen_data">Cena:</b>  {{ screen.cena }}</p>

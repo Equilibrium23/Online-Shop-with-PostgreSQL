@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from databaseHandler import select_base
 from .forms import DeleteForm
-from .forms import InsertDostawa,InsertMonitor,InsertPracownik,InsertProducent,InsertZdjecie
+from .forms import InsertDostawa,InsertMonitor,InsertPracownik,InsertProducent
 from .forms import UpdateCenaDostawy,UpdateCenaMonitora,UpdateZamowienie,UpdateZwrot
 from databaseHandler import admin_insert,admin_update,admin_delete
 
@@ -42,13 +42,6 @@ def insert_form(request,resource):
             form = InsertProducent(request.POST)
             if form.is_valid():
                 admin_insert.insert_producent(form.cleaned_data)
-                return redirect('admin_home')
-    elif resource == 'zdjecie':
-        form = InsertZdjecie
-        if request.method == 'POST':
-            form = InsertZdjecie(request.POST)
-            if form.is_valid():
-                admin_insert.insert_zdjecie(form.cleaned_data)
                 return redirect('admin_home')
     elif resource == 'dostawa':
         form = InsertDostawa

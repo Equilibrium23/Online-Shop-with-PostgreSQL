@@ -29,7 +29,10 @@ def create_data_from_fetch(mobile_records,cursor):
     for i in range(len(mobile_records)):
         for j in range(len(mobile_records[i])):
             data[i][column_names[j]] = mobile_records[i][j]
-        data[i]['path'] = pictures[data[i]['id_monitor']]
+        try:
+            data[i]['path'] = pictures[data[i]['id_monitor']]
+        except:
+            pass
     return data
 
 

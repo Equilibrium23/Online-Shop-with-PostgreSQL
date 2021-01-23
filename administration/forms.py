@@ -32,12 +32,6 @@ class InsertProducent(forms.Form):
     nr_tel = forms.CharField(label = 'nr_tel', max_length=1000)
     
 
-class InsertZdjecie(forms.Form):
-    id_monitor = forms.IntegerField(label = 'id_monitor', max_value=999, min_value = 1)
-    nazwa = forms.CharField(label = 'nazwa', max_length=1000)
-    data_dodania = forms.DateField(label = "data_dodania w formacie Y-M-D" ,input_formats=['%Y-%m-%d'])
-    image = forms.ImageField(label = 'zdjecie')
-
 class InsertDostawa(forms.Form):
     nazwa = forms.CharField(label = 'nazwa', max_length=1000)
     cena = forms.FloatField(max_value=999, min_value=1)
