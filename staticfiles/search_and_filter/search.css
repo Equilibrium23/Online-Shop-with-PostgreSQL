@@ -17,14 +17,11 @@
     width: 65%;
     left: 25%;
     margin-left: 5%;
-    border: 2px solid black;
     height: 100%;
-    background-color: aliceblue;
 }
 
 .display_screen{
-    background-color: aliceblue;
-    border: 5px solid black;
+    background-color: white;
     border-radius: 30px;
 }
 .screen_image{
@@ -34,7 +31,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 5px solid blue;
     height: 100%;
     float: left;
 }
@@ -54,7 +50,6 @@
     margin-left: 5%;
     width: 27%;
     float: left;
-    border: 5px solid yellow;
     width:fit-content ;
 }
 .screen_data{
@@ -63,7 +58,6 @@
 .opinion{
     width: 36%;
     float: left;
-    border: 5px solid red;
 }
 .blank{
     clear: both;

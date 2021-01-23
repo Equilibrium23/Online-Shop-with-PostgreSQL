@@ -27,3 +27,7 @@ def adress(value):
 @register.filter(name='return_template')
 def return_template(value):
     return value[:-1]
+
+@register.filter(name='picture')
+def return_template(value):
+    return '/databaseHandler/static/images/'+value
