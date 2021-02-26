@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r Online_Shop/requirements.txt;
+    - name: test with django tests
+      run: |
+        coverage run --source='Online_Shop/' Online_Shop/manage.py test Online_Shop
+        coverage report
