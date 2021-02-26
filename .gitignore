@@ -4,4 +4,4 @@
 activateVenv
 staticfiles/
 static/
-Online_Shop/db.sqlite3
+db.sqlite3
