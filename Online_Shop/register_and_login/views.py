@@ -24,7 +24,7 @@ def login(request):
                 if form.cleaned_data['is_staff_member'] == True:
                     return redirect('admin_home')
                 else:
-                    return redirect('logged')
+                    return redirect('home')
             else:
                 form = forms.loginForm()
                 return render(request,'register_and_login/login.html',{'form':form,'title':'login','fail':True})
@@ -35,10 +35,12 @@ def login(request):
 def set_session(request, login_data):
     user = User()
     if login_data['is_staff_member'] == True:
-        user_id = user.get_staff_id(login_data)
+        staff_id = user.get_staff_id(login_data)
+        request.session['staff_id'] = staff_id
     else:
         user_id = user.get_client_id(login_data)
-    request.session['user_id'] = user_id
+        request.session['user_id'] = user_id
+
 
 
 
