@@ -11,9 +11,15 @@ class User:
     def register(self,register_data):
         cursor = self.connection.cursor()
         register_query = "INSERT INTO project.klient VALUES({},\'{}\',\'{}\',\'{}\',\'{}\',\'{}\');".format('DEFAULT',register_data['name'],register_data['surname'],register_data['login'],register_data['password'],register_data['email'])
-        cursor.execute(register_query)
+        try:
+            cursor.execute(register_query)
+            status = "OK"    
+        except:
+            status = "ERROR"    
         self.connection.commit()
         cursor.close()
+        print("XD")
+        return status
 
     def check_user_password(self,user_record,password):
         if user_record[1] == password:

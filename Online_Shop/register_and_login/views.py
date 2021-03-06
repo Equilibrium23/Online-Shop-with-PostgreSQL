@@ -7,8 +7,12 @@ def register(request):
         form = forms.registerForm(request.POST)
         if form.is_valid():
             user = User()
-            user.register(form.cleaned_data)
-            return redirect('login')
+            register_status = user.register(form.cleaned_data)
+            if register_status == "OK":
+                return redirect('login')
+            else:
+                return render(request, 'register_and_login/register.html', {'form':form,'title':'register','error':'Taki uzytkownik istnieje !'})
+
     else:
         form = forms.registerForm()
     return render(request, 'register_and_login/register.html', {'form':form,'title':'register'})
