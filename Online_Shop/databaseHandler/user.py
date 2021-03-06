@@ -7,7 +7,6 @@ class User:
 
     def __del__(self):
         self.connection.close()
-        print("koniec")
 
     def register(self,register_data):
         cursor = self.connection.cursor()
