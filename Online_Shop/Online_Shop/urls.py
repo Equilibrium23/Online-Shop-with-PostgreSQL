@@ -37,20 +37,24 @@ urlpatterns = [
     path('admin_home/logout/', administration_views.logout, name = "adm_logout"),
     path('admin_home/manage/', administration_views.manage, name = "manage"),
 
-    
-    path('logged/basket/', user_profile_views.basket,name = "basket"),
-    path('logged/basket/order/', user_profile_views.make_order,name = "order"),
-    path('logged/search/', searching_views .search_items,name = "search"),
-    path('logged/search/filter/', searching_views.filter_items,name = "search_filter"),
-    path('logged/profile/', user_profile_views.profile,name = "profile"),
-    path('logged/profile/logout/', user_profile_views.logout,name = "logout"),
-    path('logged/profile/orders', user_profile_views.user_orders,name = "orders"),
-    path('logged/profile/return/', user_profile_views.return_product,name = "return"),
-    path('logged/profile/returns/', user_profile_views.show_return_products,name = "returns"),
-    path('logged/profile/opinions/', user_profile_views.user_opinions,name = "opinions"),
-    path('logged/profile/opinion/', user_profile_views.add_opinion,name = "opinion"),
-    path('logged/profile/account_details/', user_profile_views.account_details,name = "account_details"),
-    path('logged/profile/account_details/adress/', user_profile_views.set_main_adress,name = "adress"),
-    path('logged/profile/account_details/adress/delete/', user_profile_views.delete_user_adress,name = "delete"),
-    path('logged/basket/<int:monitor_id>/', user_profile_views.add_item_to_basket,name = "basket"),
+    #search and filter
+    path('home/search/', searching_views .search_items,name = "search"),
+    path('home/search/filter/', searching_views.filter_items,name = "search_filter"),
+
+    #basket
+    path('home/basket/', user_profile_views.basket,name = "basket"),
+    path('home/basket/<int:monitor_id>/', user_profile_views.add_item_to_basket,name = "basket"),
+    path('home/basket/order/', user_profile_views.make_order,name = "order"),
+
+    #profile
+    path('home/profile/', user_profile_views.profile,name = "profile"),
+    path('home/profile/logout/', user_profile_views.logout,name = "logout"),
+    path('home/profile/orders', user_profile_views.user_orders,name = "orders"),
+    path('home/profile/return/', user_profile_views.return_product,name = "return"),
+    path('home/profile/returns/', user_profile_views.show_return_products,name = "returns"),
+    path('home/profile/opinions/', user_profile_views.user_opinions,name = "opinions"),
+    path('home/profile/opinion/', user_profile_views.add_opinion,name = "opinion"),
+    path('home/profile/account_details/', user_profile_views.account_details,name = "account_details"),
+    path('home/profile/account_details/adress/', user_profile_views.set_main_adress,name = "adress"),
+    path('home/profile/account_details/adress/delete/', user_profile_views.delete_user_adress,name = "delete"),
 ]
