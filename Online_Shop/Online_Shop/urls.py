@@ -23,14 +23,21 @@ from home import views as home_views
 
 
 urlpatterns = [
-    path('', home_views.home, name = "home"),
+    #home
+    path('', home_views.start_page, name = "start_page"),
+    path('home/', home_views.home,name = "home"),
+
+    #register and login
+    path('login/', register_and_login_views.login,name = "login"),
+    path('register/', register_and_login_views.register,name = "register"),
+
+    #admin
     path('admin/', admin.site.urls),
     path('admin_home/', administration_views.home, name = "admin_home"),
     path('admin_home/logout/', administration_views.logout, name = "adm_logout"),
     path('admin_home/manage/', administration_views.manage, name = "manage"),
-    path('login/', register_and_login_views.login,name = "login"),
-    path('register/', register_and_login_views.register,name = "register"),
-    path('logged/', user_profile_views.logged,name = "logged"),
+
+    
     path('logged/basket/', user_profile_views.basket,name = "basket"),
     path('logged/basket/order/', user_profile_views.make_order,name = "order"),
     path('logged/search/', searching_views .search_items,name = "search"),
