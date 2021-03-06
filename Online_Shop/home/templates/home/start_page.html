@@ -1,0 +1,10 @@
+{% extends "home/base.html" %}
+{% block content %}
+    <p>Sklep z komputerami.</p>
+    <p>Masz konta -> 
+        <a href="{% url 'login' %}">Zaloguj sie</a>
+    </p>
+    <p>Nie masz konta -> 
+        <a href="{% url 'register' %}">Zarejestruj sie</a>
+    </p>
+{% endblock content %}
