@@ -3,9 +3,6 @@ from . import forms
 from databaseHandler import basket as user_basket
 from databaseHandler import profile as user_profile
 
-def logged(request):
-    return render(request, 'user_profile/logged_user_base.html')
-
 def profile(request):
     return render(request, 'user_profile/profile.html')
 
