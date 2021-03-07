@@ -38,7 +38,7 @@ urlpatterns = [
     path('admin_home/manage/', administration_views.manage, name = "manage"),
 
     #search and filter
-    path('home/search/', searching_views .search_items,name = "search"),
+    path('home/search/', searching_views.search_items,name = "search"),
     path('home/search/filter/', searching_views.filter_items,name = "search_filter"),
 
     #basket
@@ -54,7 +54,7 @@ urlpatterns = [
     path('home/profile/returns/', user_profile_views.show_return_products,name = "returns"),
     path('home/profile/opinions/', user_profile_views.user_opinions,name = "opinions"),
     path('home/profile/opinion/', user_profile_views.add_opinion,name = "opinion"),
-    path('home/profile/account_details/', user_profile_views.account_details,name = "account_details"),
-    path('home/profile/account_details/adress/', user_profile_views.set_main_adress,name = "adress"),
-    path('home/profile/account_details/adress/delete/', user_profile_views.delete_user_adress,name = "delete"),
+    path('home/profile/adresses/', user_profile_views.user_adress,name = "account_details"),
+    path('home/profile/adresses/adress/', user_profile_views.set_main_adress,name = "adress"),
+    path('home/profile/adresses/adress/delete/', user_profile_views.delete_user_adress,name = "delete"),
 ]
