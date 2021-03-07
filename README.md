@@ -11,7 +11,7 @@
 Will be soon
 
 ## User Stories
-#### Our app is created for two types of users :
+#### My app is created for two types of users :
   - #####  clients
   - ##### shop admins<br/><br/>
 Will be soon
