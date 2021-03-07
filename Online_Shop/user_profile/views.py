@@ -25,16 +25,26 @@ def user_orders(request):
     user_orders = user_basket.get_user_orders(request.session['user_id'])
     return render(request, 'user_profile/user_orders.html',{'user_orders':user_orders})
 
-def account_details(request):
+
+def render_user_adresses_site(request):
+    form = forms.AccountDetailsForm()
+    adressess = user_profile.get_account_details( request.session['user_id'])
+    return render(request, 'user_profile/account_details.html', {'form':form,'account_details':True,'adressess':adressess})
+
+def user_adress(request):
     if request.method == 'POST':
         form = forms.AccountDetailsForm(request.POST)
         if form.is_valid():
             user_profile.add_account_details( request.session['user_id'],form.cleaned_data)
-            return redirect('profile')
-    else:
-        form = forms.AccountDetailsForm()
-        adressess = user_profile.get_account_details( request.session['user_id'])
-    return render(request, 'user_profile/account_details.html', {'form':form,'account_details':True,'adressess':adressess})
+    return render_user_adresses_site(request)
+
+def set_main_adress(request):
+    user_profile.set_adress(request.GET.get('id_uzytkownik'),request.GET.get('id_adress'))
+    return redirect("account_details")
+
+def delete_user_adress(request):
+    user_profile.delete_adress(request.GET.get('id_uzytkownik'),request.GET.get('id_adress'))
+    return redirect("account_details")
 
 
 def add_item_to_basket(request,monitor_id):
@@ -57,14 +67,7 @@ def add_opinion(request):
         form.fields["hidden_input"].initial = request.GET.get('produkt')
     return render(request, 'user_profile/add_opinion.html', {'form':form,'add_opinion':True})
 
-def set_main_adress(request):
-    user_profile.set_adress(request.GET.get('id_uzytkownik'),request.GET.get('id_adress'))
-    return redirect('profile')
 
-
-def delete_user_adress(request):
-    user_profile.delete_adress(request.GET.get('id_uzytkownik'),request.GET.get('id_adress'))
-    return redirect('profile')
 
 def return_product(request):
     if request.method == 'POST':
