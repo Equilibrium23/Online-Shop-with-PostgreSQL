@@ -31,7 +31,7 @@ def login(request):
                     return redirect('home')
             else:
                 form = forms.loginForm()
-                return render(request,'register_and_login/login.html',{'form':form,'title':'login','fail':True})
+                return render(request,'register_and_login/login.html',{'form':form,'title':'login','fail':status[1]})
     else:
         form = forms.loginForm()
     return render(request, 'register_and_login/login.html', {'form':form,'title':'login'})

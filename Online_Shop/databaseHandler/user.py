@@ -1,4 +1,5 @@
 from Online_Shop import settings
+from .passwordHash import hash_password,check_hashed_password
 import psycopg2
 
 class User:
@@ -10,7 +11,8 @@ class User:
 
     def register(self,register_data):
         cursor = self.connection.cursor()
-        register_query = "INSERT INTO project.klient VALUES({},\'{}\',\'{}\',\'{}\',\'{}\',\'{}\');".format('DEFAULT',register_data['name'],register_data['surname'],register_data['login'],register_data['password'],register_data['email'])
+        hashedPassword = hash_password(register_data['password']) 
+        register_query = "INSERT INTO project.klient VALUES({},\'{}\',\'{}\',\'{}\',\'{}\',\'{}\');".format('DEFAULT',register_data['name'],register_data['surname'],register_data['login'],hashedPassword,register_data['email'])
         try:
             cursor.execute(register_query)
             status = "OK"    
@@ -18,11 +20,10 @@ class User:
             status = "ERROR"    
         self.connection.commit()
         cursor.close()
-        print("XD")
         return status
 
     def check_user_password(self,user_record,password):
-        if user_record[1] == password:
+        if  check_hashed_password(password,user_record[1]):
             return [True,'Autoryzacja pomyslna !']
         else:
             return [False,'Zle haslo !']
@@ -38,7 +39,6 @@ class User:
 
         cursor.execute(get_user_query)
         user_record = cursor.fetchone() 
-
         if user_record is None:
             login_status = [False,'Nie ma takiego uzytkownika !']
         else:
