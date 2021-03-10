@@ -1,4 +1,4 @@
-{% extends "user_profile/logged_user_base.html" %}
+{% extends "home/home.html" %}
 {% load static %}
 {% load template_filters %}
 {% load crispy_forms_tags %}
@@ -70,11 +70,9 @@
                             <button type="submit" name='mybtn2'>Dodaj do koszyka</button>
                         </form>
                     </div>
-                    {% if screen.path %}
-                        <div class = "screen_image">
-                            <img src="{% static screen.path|picture %}">
-                        </div>
-                    {%endif%}
+                    <div class = "screen_image">
+                        <img src="{% static screen.path|picture %}">
+                    </div>
                     <div class = "description">
                         <p> <b class ="screen_data">Model:</b>  {{ screen.nazwa }}</p>
                         <p> <b class ="screen_data">Cena:</b>  {{ screen.cena }}</p>

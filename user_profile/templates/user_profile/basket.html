@@ -1,4 +1,4 @@
-{% extends "user_profile/logged_user_base.html" %}
+{% extends "home/home.html" %}
 {% load template_filters %}
 {% block content %}
 {% load crispy_forms_tags %}
@@ -20,7 +20,7 @@
                     </td>
                 {% endfor %}
                 <td class = "basket_cell">
-                    <a href="/logged/basket/?name={{column|access:0}}">Usun z koszyka</a>
+                    <a href="/home/basket/?name={{column|access:0}}">Usun z koszyka</a>
                 </td>
             </tr>
         {% endfor %}

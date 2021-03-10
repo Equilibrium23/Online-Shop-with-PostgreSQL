@@ -14,8 +14,8 @@ class OpinionForm(forms.Form):
             ('1','1'),
             ('2','2'),
             ('3','3'),
-            ('4','4'),
-            ('5','5'),
+            ('3','4'),
+            ('3','5'),
             )
     grade = forms.ChoiceField(label = 'ocena', widget=forms.Select, choices=CHOICES)
     hidden_input = forms.CharField(widget=forms.HiddenInput(), initial="0")
