@@ -96,7 +96,7 @@ body
 }
 #fail
 {
-    margin-left: 745px;
+    text-align: center;
     margin-top: 100px;
     transform: scale(3, 3);
     color: white;
