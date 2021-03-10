@@ -75,7 +75,7 @@ def return_product(request):
         if form.is_valid():
             # dodanie zwrotu jest do dopracowania
             user_profile.make_return(form.cleaned_data,request.session['user_id'],request.GET.get('zamowienie'))
-            return redirect('profile')
+            return redirect('returns')
     else:
         form = forms.ReturnForm()
         form.fields["hidden_input"].initial = request.GET.get('produkt')
