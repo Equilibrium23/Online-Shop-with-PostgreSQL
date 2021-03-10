@@ -1,7 +1,7 @@
 # Monitor Shop
 
 #### Link to my demo app deployed on heroku
-##### will be soon
+##### https://equilibrium-online-shop.herokuapp.com/
 ### Content
 * [App Description](#app-description)
 * [User Stories](#user-stories)
