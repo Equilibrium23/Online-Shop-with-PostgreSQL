@@ -12,16 +12,16 @@
 ## App Description
 #### My app (shop with monitors) is created for two types of users :
   - #####  shop clients are able to:
-    -##### login
-    -##### search and filters monitors 
-    -##### make an order
-    -##### add an opinion
-    -##### submit a refund 
-    -##### add and set main adress
+    - ###### login
+    - ###### search and filters monitors 
+    - ###### make an order
+    - ###### add an opinion
+    - ###### submit a refund 
+    - ###### add and set main adress
   - ##### shop admins are able to:
-    -##### login
-    -##### explore database
-    -##### add/update/delete some records
+    - ###### login
+    - ###### explore database
+    - ###### add/update/delete some records
 
 ## Presentation of the application
 ##### Interface and database are Polish because app was created for 'Databases 1' - 2020 course.  
