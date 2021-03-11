@@ -32,6 +32,7 @@
 
 
 ## Database structure
+![erd](https://user-images.githubusercontent.com/58709131/110777467-6ef63580-8261-11eb-9d3e-0a33b776fdf7.JPG)
 
 
 ## Technologies
