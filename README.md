@@ -5,8 +5,8 @@
 
 ### Content
 * [App description](#app-description)
-* [Presentation of the application](#app-presentation)
-* [Database structure](#database)
+* [Presentation of the application](#presentation-of-the-application)
+* [Database structure](#database-structure)
 * [Technologies](#technologies)
 
 ## App Description
