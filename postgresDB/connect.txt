@@ -1,3 +1,0 @@
-psql -h hattie.db.elephantsql.com -p 5432 -U hibqfymb hibqfymb
-pass: J9K-YolYEAC6yt7pX44sEBveOZVstb6t
-SET search_path TO project;

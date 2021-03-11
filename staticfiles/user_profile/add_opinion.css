@@ -1,0 +1,11 @@
+#add_opinion_container{
+    margin-top: -10%;
+    background-color: aliceblue;
+    border-radius: 50px;
+}
+#add_opinion{
+    margin-left: 10%;
+}
+.form{
+    font-size: xx-large;
+}

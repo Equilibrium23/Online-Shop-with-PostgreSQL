@@ -3,22 +3,41 @@ from databaseHandler import select_base
 from .forms import DeleteForm
 from .forms import InsertDostawa,InsertMonitor,InsertPracownik,InsertProducent,InsertZdjecie
 from .forms import UpdateCenaDostawy,UpdateCenaMonitora,UpdateZamowienie,UpdateZwrot
+from django.http import HttpResponse
 from databaseHandler import admin_insert,admin_update,admin_delete
 
+
+def admin_authorization(request):
+    try:
+        request.session['staff_id']
+        return True
+    except KeyError:
+        return False
+
 def home(request):
-    return render(request,'administration/admin.html')
-
-def delete_form(request,resource):
-    if request.method == 'POST':
-        form = DeleteForm(request.POST)
-        if form.is_valid():
-            admin_delete.delete(form.cleaned_data)
-            return redirect('admin_home')
+    if admin_authorization(request):
+        return render(request,'administration/admin.html')
     else:
-        form = DeleteForm()
-        form.fields["hidden_input"].initial = resource
-    return render(request, 'administration/forms.html', {'form':form,'form_title':['delete',resource]})
+        return HttpResponse('Unauthorized', status=401)
 
+
+def manage(request):
+    if admin_authorization(request):
+        method = request.GET.get('method')
+        if method == 'select':
+            select = select_base.select_base()
+            return render(request,'administration/db.html',{'select':select})
+        else:
+            resource = request.GET.get('resource')
+            if method == 'insert':
+                return insert_form(request,resource)
+            elif method == 'update':
+                return update_form(request,resource)
+            elif method == 'delete':
+                return delete_form(request,resource)
+        return redirect('admin_home')
+    else:
+        return HttpResponse('Unauthorized', status=401)
 
 
 def insert_form(request,resource):
@@ -91,20 +110,17 @@ def update_form(request,resource):
                 return redirect('admin_home')
     return render(request, 'administration/forms.html', {'form':form,'form_title':['update',resource]})
 
-def manage(request):
-    method = request.GET.get('method')
-    if method == 'select':
-        select = select_base.select_base()
-        return render(request,'administration/db.html',{'select':select})
+
+def delete_form(request,resource):
+    if request.method == 'POST':
+        form = DeleteForm(request.POST)
+        if form.is_valid():
+            admin_delete.delete(form.cleaned_data)
+            return redirect('admin_home')
     else:
-        resource = request.GET.get('resource')
-        if method == 'insert':
-            return insert_form(request,resource)
-        elif method == 'update':
-            return update_form(request,resource)
-        elif method == 'delete':
-            return delete_form(request,resource)
-    return redirect('admin_home')
+        form = DeleteForm()
+        form.fields["hidden_input"].initial = resource
+    return render(request, 'administration/forms.html', {'form':form,'form_title':['delete',resource]})
 
 def logout(request):
     del request.session['staff_id']

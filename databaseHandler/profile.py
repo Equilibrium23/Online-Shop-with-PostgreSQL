@@ -90,7 +90,7 @@ def make_return(form,id_uzytkownik,id_szczegoly_zamowienia):
         query = '''SELECT project.utworz_zwrot({},{},\'{}\',{},{},\'{}\');'''.format(id_uzytkownik, form['delivery_type'], form['reason'], form['hidden_input'], id_szczegoly_zamowienia, form['return_type'])
         cur.execute(query)
     else:
-        query = '''UPDATE project.szczegoly_zwrotu SET ilosc = {} WHERE id_szczegoly_zamowienia = {}'''.format( old_row[4]+1, id_szczegoly_zamowienia )
+        query = '''UPDATE project.szczegoly_zwrotu SET ilosc = {} WHERE id_szczegoly_zamowienia = {}'''.format( old_row[3]+1, id_szczegoly_zamowienia )
         cur.execute(query)
     con.commit()
     cur.close()

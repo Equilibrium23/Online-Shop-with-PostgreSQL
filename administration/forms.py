@@ -45,12 +45,24 @@ class InsertDostawa(forms.Form):
 
 
 class UpdateZamowienie(forms.Form):
+        CHOICES =(
+            ['Przetwarzanie','Przetwarzanie'],
+            ['Oczekiwane na wplate','Oczekiwane na wplate'],
+            ['Wyslane','Wyslane'],
+            ['Zrealizowane','Zrealizowane'],
+        )
         id_zamowienie = forms.IntegerField(label = 'id_zamowienie', max_value=999, min_value = 1)
-        status = forms.CharField(label = 'status', max_length=1000)
+        status = forms.ChoiceField(label = 'status', widget=forms.Select, choices=CHOICES)
+
 
 class UpdateZwrot(forms.Form):
+        CHOICES =(
+            ['Przetwarzanie','Przetwarzanie'],
+            ['Zrealizowane','Zrealizowane'],
+            ['Zwrot odrzucony','Zwrot odrzucony'],
+        )
         id_zwrot = forms.IntegerField(label = 'id_zwrot', max_value=999, min_value = 1)
-        status = forms.CharField(label = 'status', max_length=1000)
+        status = forms.ChoiceField(label = 'status', widget=forms.Select, choices=CHOICES)
 
 class UpdateCenaMonitora(forms.Form):
         id_monitor = forms.IntegerField(label = 'id_monitor', max_value=999, min_value = 1)
