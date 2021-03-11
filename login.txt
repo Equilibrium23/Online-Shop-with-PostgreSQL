@@ -1,2 +1,7 @@
-test@test.pl
-test
+client:
+L:test
+P:test
+
+admin:
+L:tomasz.kowalski
+P:admin
