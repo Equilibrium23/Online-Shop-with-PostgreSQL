@@ -26,9 +26,9 @@
 ## Presentation of the application
 ##### Interface and database are Polish because app was created for 'Databases 1' - 2020 course.  
 ### User view
-![](user.gif)
+![](userView.gif)
 ### Admin view
-![](admin.gif)
+![](adminView.gif)
 
 
 ## Database structure
